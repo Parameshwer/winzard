@@ -1,0 +1,143 @@
+
+  button.custom-btn{
+    background-color: #E9BB00;
+    border-radius: 21px !important;
+    text-align: center;
+    font-size: 13px !important;
+    letter-spacing: 0px;
+    color: #282856;
+    font-weight: 400;
+    min-width: 107px;
+    height: 36px !important;
+    text-transform: capitalize;
+    box-shadow: none;
+    border: 0;
+    &.white-btn{
+      background-color: #fff;
+      border: 1px solid #e8e8e8 !important;
+      &:hover{
+        background-color: #e8e8e8;
+      }
+    }
+    &.captalize{
+      text-transform: uppercase;
+    }
+}
+
+button.confirm-btn{
+  background-color: #E9BB00;
+  border-radius: 25px !important;
+  text-align: center;
+  font-size: 15px !important;
+  letter-spacing: 0px;
+  color: #26264D;
+  font-weight: 600;
+  margin: 16px 10px;
+  min-width: 165px;
+  height: 50px !important;
+  text-transform: uppercase;
+  &.white-btn{
+    background-color: #fff;
+    color: #6A6A6A;
+    border: 1px solid #E0E0EB;
+  }
+}
+
+.primary-txt{
+  color: #0f71eb;
+}
+
+.custom-pagination{
+  display: flex;
+  //align-items: center;
+  justify-content: flex-end;
+  color: rgba(77, 79, 92, 0.5);
+  padding: 24px 0px;
+  .pagination{
+    li.page-item{
+      margin: 5px;
+      font-size: 13px;
+      width: 35px;
+      height: 35px;
+      a{
+        background: #FFFFFF;
+        color: rgba(77, 79, 92, 0.5);
+        border: 1px solid #E8E9EC;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+      }
+      &.active{
+        a{
+          background: #3B97FF;
+          color: #fff;
+        }
+       
+      }
+      
+    }
+  }
+  .mat-form-field{
+    &.custom-input{
+      &.status-field{
+        margin: 5px;
+        font-size: 13px;
+        bottom: 0;
+    }
+    }
+  }
+  .custom-input.status-field{
+    .mat-form-field-flex,
+    .mat-input-flex{
+         border-color: #E8E9EC;
+         padding: 4px 12px;
+         }
+         .mat-select-value{
+          color: rgba(77, 79, 92, 0.5);
+          font-size: 13px;
+         }
+         .mat-select-arrow{
+          color: rgba(77, 79, 92, 0.5);
+         }
+}
+}
+
+.name-circle{
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FEDFDF;
+  border-radius: 50%;
+  font-size:12px;
+  font-weight: 500;
+  color: #37375E;
+  margin: 5px;
+  text-transform: uppercase;
+}
+
+.loader{
+  .mat-spinner{
+    width: 45px !important;
+    height: 45px !important;
+    color: #0f71eb;
+     svg{
+      width: 45px !important;
+      height: 45px !important;
+    }
+    circle{
+      stroke: #0f71eb !important;
+    }
+  }
+}
+
+.no-data-txt{
+  font-size: 25px;
+  font-weight: 700;
+  color: #26264D;
+  margin: 15px 0px 30px;
+}

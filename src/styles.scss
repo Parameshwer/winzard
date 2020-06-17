@@ -1,0 +1,236 @@
+@import "assets/styles/common";
+@import "assets/styles/org-win";
+@import "assets/styles/_dialog";
+@import "assets/styles/layout";
+@import "assets/styles/config";
+
+@import "~animate.css/animate.min";
+
+/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif !important;
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: #c4c4d2;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #c4c4d2;
+}
+
+.password-field {
+    position: relative;
+    mat-icon {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        color: #a6aebf;
+        cursor: pointer;
+    }
+}
+.authentication-section {
+    align-items: center;
+    height: 100%;
+    max-width: 350px;
+    margin: 0 auto;   
+    &.email-otp-page {
+        max-width: 560px;
+        text-align: center;
+        ng-otp-input {
+            .wrapper  {
+                input {
+                   
+                    &.otp-input {
+                        border: 1px solid #9b9bae;
+                        border-radius: 0;         
+                        font-size: 20px;                                       
+                        &:focus {
+                            outline: 0;
+                        }
+                        &:nth-child(1),&:nth-child(3),&:nth-child(5) {                            
+                            margin-right: 0;
+                            border-right: 0;                            
+                        }                
+                        &:nth-child(1) {
+                            border-radius: 5px 0 0 5px;
+                        }
+                        &:nth-child(2) {
+                            border-radius: 0 5px 5px 0;
+                            margin-right: 20px;
+                        }        
+                        &:nth-child(3) {
+                            border-radius: 5px 0 0 5px;
+                        } 
+                        &:nth-child(4) {
+                            border-radius: 0 5px 5px 0;
+                            margin-right: 20px;
+                        }        
+                        &:nth-child(5) {
+                            border-radius: 5px 0 0 5px;
+                        }        
+                        &:nth-child(6) {
+                            border-radius: 0 5px 5px 0;
+                        }                        
+                    }
+                    
+                }
+            }
+        }
+    }
+    .heading {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 800;        
+        letter-spacing: 0px;
+        color: #000;
+        margin-bottom: 100px;
+    }
+    .forgot-txt {
+        text-align: right;
+        margin: 10px 0px;
+        font-size: 15px;
+        font-weight: 500;
+        font-family: "Roboto", sans-serif !important;
+        letter-spacing: 0.3px;
+        color: #0e71eb;
+        outline: none;
+        cursor: pointer;
+    }
+    .btn-group {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 25px;
+        .login-btn {
+            width: 135px;
+            height: 51px;
+            margin: 30px auto;
+            background-color: #e9bb00;
+            border-radius: 26px;
+            border: 0;
+            cursor: pointer;
+        }
+    }
+    form {
+        label {
+            font-size: 15px;
+            letter-spacing: 0.6px;
+            color: #37375e;
+            font-family: "Roboto", sans-serif !important;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+            .invalid-feedback {
+                position: absolute;
+                bottom: -19px;
+                left: 0;
+                font-family: "Roboto", sans-serif !important;
+            }
+        }
+        .form-control {
+            letter-spacing: 0px;
+            color: #37375e;
+            font-size: 16px;
+            height: 50px;
+            border-radius: 4px;
+            border: 1px solid #eaeaea;
+            &:focus {
+                box-shadow: 0 0 0 1px rgba(0,123,255,.25);
+            }
+            &.is-invalid + mat-icon {
+                opacity: 0;
+            }
+        }
+    }
+    .register-txt {
+        text-align: center;
+        font-size: 16px;
+        letter-spacing: 0px;
+        color: #4b4d4e;
+        a.signup-anchor {
+            color: #3b97ff;
+            cursor: pointer;
+        }
+    }
+    .sub-info-small {
+        font-size: 13px;
+        color: #9192a7;
+    }
+    
+    app-email-otp-page, app-change-password-page,app-forgot-password,&.onboard-section {        
+        .heading {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .sub-info {
+            margin-bottom: 60px;
+        }
+    }
+    &.onboard-section    {
+        max-width: 500px;
+        .sub-info {
+            text-align: center;            
+        }        
+    }
+    &.change-password-page {
+        max-width: 320px;
+        app-change-password-page {
+            .heading {                
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+.spinner-border {
+    display: inline-block;
+    width: 6rem;
+    height: 6rem;
+    vertical-align: text-bottom;
+    border: 2px solid #2a5699;
+    border-right-color: #fff;
+    border-radius: 50%;
+    -webkit-animation: spinner-border .75s linear infinite;
+    animation: spinner-border .75s linear infinite;
+    color: #2a5699;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: -3rem;
+    z-index: 999;
+}
+.tooltip-inner {
+    max-width: 560px;    
+    width: 560px; 
+    text-align: left;
+    p {
+        margin: 0;
+    }
+}

@@ -1,0 +1,121 @@
+<mat-toolbar class="header">
+    <div class="logo p-0">
+        <!-- WINZARD -->
+        <img src="../../../../assets/images/logo.jpeg" class="logo-img"
+        [routerLink]="['/winzard']"/>
+    </div>
+    <div class="col-md-4">
+        <mat-nav-list class="d-flex p-0">
+                <!-- [routerLink]="['/myWIN']" -->
+            <mat-list-item routerLinkActive="active"  [ngbPopover]="myWIN">
+                <mat-icon class="menu-icon">person</mat-icon>
+                <span class="menu-txt">MyWin</span>
+                <mat-icon class="arrow">keyboard_arrow_down</mat-icon>
+            </mat-list-item>
+            <ng-template #myWIN>
+                <mat-list-item>
+                    Goal Management
+                </mat-list-item>
+                <mat-list-item>
+                    Engagement Analysis
+                </mat-list-item>
+                <mat-list-item>
+                    Self Assessment
+                </mat-list-item>
+                <mat-list-item>
+                    Learning & Development
+                </mat-list-item>
+                <mat-list-item >
+                    Talent Manager
+                </mat-list-item>
+                <mat-list-item>
+                    People Assessment
+                </mat-list-item>
+            </ng-template>
+
+            <mat-list-item routerLinkActive="active"
+            [ngbPopover]="teamWIN">
+                <mat-icon class="menu-icon">group</mat-icon>
+                <span class="menu-txt">TeamWIN</span>
+                <mat-icon class="arrow">keyboard_arrow_down</mat-icon>
+            </mat-list-item>
+
+            <ng-template #teamWIN>
+                <mat-list-item>
+                    Goal Management
+                </mat-list-item>
+                <mat-list-item [routerLink]="['./talentReview']">
+                    Talent Manager
+                </mat-list-item>
+                <mat-list-item>
+                    Employee Experience
+                </mat-list-item>
+                <mat-list-item>
+                    People Assessment
+                </mat-list-item>
+            </ng-template>
+
+            <mat-list-item routerLinkActive="active"
+            [ngbPopover]="insights">
+                <mat-icon class="menu-icon">bar_chart</mat-icon>
+                <span class="menu-txt">Insights</span>
+                <mat-icon class="arrow">keyboard_arrow_down</mat-icon>
+            </mat-list-item>
+
+            <ng-template #insights>
+                <mat-list-item>
+                    Goal Management
+                </mat-list-item>
+                <mat-list-item [routerLink]="['./insights/talentManagement']">
+                    Talent Manager
+                </mat-list-item>
+                <mat-list-item>
+                    People Assessment
+                </mat-list-item>
+            </ng-template>
+
+        </mat-nav-list>
+    </div>
+    <div class="flex-1"></div>
+    <div class="col-md-3 p-0">
+        <div class="right-menus">
+            <mat-nav-list class="d-flex p-0">
+                <mat-list-item routerLinkActive="active"
+                [routerLink]="['./orgWIN/talentMangement']" class="org-menu">OrgWIN</mat-list-item>
+                <mat-list-item class="icon-menu-link">
+                    <!-- <i class="fa fa-cog"></i> -->
+                    <mat-icon>settings</mat-icon>
+                </mat-list-item>
+                <mat-list-item [routerLink]="['/login']" class="icon-menu-link">
+                    <!-- <i class="fa fa-power-off"></i> -->
+                    <mat-icon>power_settings_new</mat-icon>
+                </mat-list-item>
+            </mat-nav-list>
+        </div>
+    </div>
+
+
+
+    <div id="navbarText" *ngIf="false">
+        <ul class="navbar-nav ml-auto">
+            <!--container-->
+            <li dropdown="" class="nav-item user-dropdown open show"><a dropdowntoggle="" class="nav-link"
+                    aria-haspopup="true" aria-expanded="true">
+                    <div class="user">
+                        MyWin
+                        <span class="fa fa-angle-down pl-2 font-weight-bold"></span></div>
+                    <span class="sr-only">User Name</span>
+                    <div class="dropdown-menu custom-dropdown dropdown-menu-right show" style="left: auto; right: 0px; top: 100%; transform: translateY(0px); bottom: auto;">
+                        <ul aria-labelledby="notification" id="user-dropdown" role="menu" class="list-unstyled">
+                            <li role="menuitem"><a class="dropdown-item py-2" ng-reflect-router-link="/profile" href="/profile">Profile</a></li>
+                            <li role="menuitem"></li>
+                            <li role="menuitem"><a class="dropdown-item py-2">Sign
+                                    Out</a></li>
+                        </ul>
+                    </div>
+                    <!--container-->
+                </a></li>
+            <!--container-->
+        </ul>
+    </div>
+</mat-toolbar>

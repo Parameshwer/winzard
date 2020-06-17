@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+        "target": "http://ec2-15-206-124-210.ap-south-1.compute.amazonaws.com:3000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

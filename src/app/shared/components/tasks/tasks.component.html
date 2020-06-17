@@ -1,0 +1,15 @@
+<div class="task-layout">
+    <div class="header-section">
+        <p>Tasks</p>
+    </div>
+
+    <div class="task-content">
+        <div  class="task-row" *ngFor="let task of taskArray">
+            <img src="../../../../assets/images/target.svg"/>
+            <div class="task-boxes">
+                <p>{{task.name}}</p>
+                <span>{{task.description}}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<form class="w-100" [formGroup]="welcomeWinzardForm">
+    <h1 class="heading">Welcome to Winzard</h1>
+    <p class="sub-info">Let's get your account setup, It will take you a minute.</p>
+    <div class="form-group">
+        <label for="userEmail">Full Name*</label>
+        <input type="text" placeholder="Enter your full name" formControlName="name" class="form-control" />       
+    </div>
+    <div class="form-group">
+        <label for="userEmail">New Password*</label>
+        <input type="text" placeholder="Your Password" formControlName="password" class="form-control" />       
+    </div>
+    <div class="btn-group">
+        <button class="login-btn" (click)="onSubmit()">Next <i class="fa fa-arrow-right"></i></button>
+    </div>  
+</form>

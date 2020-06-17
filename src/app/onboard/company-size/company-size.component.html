@@ -1,0 +1,14 @@
+<div class="w-100">
+    <h1 class="heading">How many people are working at your company?</h1>
+    <div class="form-group">
+       <div class="company-sizes">
+           <div *ngFor="let companySize of companySizes" [ngClass]="{'selected': companySize.selected}" class="company-size" (click)="onCompanySizeSelect(companySize)">{{companySize.name}}</div>
+       </div>
+    </div>
+    <div class="btn-group">
+        <button class="login-btn" (click)="onSubmit()">Next <i class="fa fa-arrow-right"></i></button>
+    </div>
+    <div class="btn-group">
+        <p class="forgot-txt" [routerLink]="['/login']">Back</p>
+    </div>
+</div>

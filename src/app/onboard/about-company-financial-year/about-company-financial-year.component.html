@@ -1,0 +1,46 @@
+<form class="w-100" [formGroup]="companyFinacialYearForm">
+    <h1 class="heading">Financial Year and Subgoal Frequency</h1>    
+    <div class="form-group row">        
+        <label for="month" class="col-sm-6">Start month of Financial year</label>
+        <div class="col-sm-6">
+            <select class="custom-select" (change)="generateCurrentFinancialYear()" formControlName="startMonth">
+                <option selected value="">Select month</option> 
+                <option *ngFor="let month of months" [value]="month">{{month}}</option>           
+            </select>
+        </div>       
+    </div>
+    <div class="form-group row">        
+        <label for="month" class="col-sm-6">First year of Financial Year</label>
+        <div class="col-sm-6">
+            <select class="custom-select" (change)="generateCurrentFinancialYear()" formControlName="startYear">
+                <option selected value="">Select year</option> 
+                <option *ngFor="let year of years;" [value]="year">{{year}}</option>           
+            </select>
+        </div>       
+    </div>
+    <div class="form-group row">        
+        <label for="month" class="col-sm-6">Subgoal Frequency</label>
+        <div class="col-sm-6">
+            <select class="custom-select" (change)="generateCurrentFinancialYear()" formControlName="subgoalFrequency">
+                <option selected value="">Select year</option> 
+                <option *ngFor="let frequency of frequencies; let i = index" [value]="frequency.id">{{frequency.name}}</option>           
+            </select>
+        </div>       
+    </div>
+    <div class="form-group row" *ngIf="financialYear">
+        <div class="col-sm-12">
+            <p>Current Financial Year: {{financialYear}}</p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <p class="sub-info-small">Please be sure of the setting here. Any change in Financial year of sub goal frequency will have an impact of the data you entered</p>
+        </div>
+    </div>
+    <div class="btn-group">
+        <button class="login-btn" (click)="onSubmit()">Finish</button>
+    </div>
+    <div class="btn-group">
+        <p class="forgot-txt" [routerLink]="['/login']">Back</p>
+    </div>
+</form>

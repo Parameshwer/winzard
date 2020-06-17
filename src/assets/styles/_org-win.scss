@@ -1,0 +1,142 @@
+.emp-list{
+    max-height: calc(100vh - 418px);
+   //  384px
+    overflow: auto;
+    min-height: 300px;
+    margin-top: 20px;
+ table{
+     width: 80%;
+     th{
+      //   position: sticky;
+      //   top: 0;
+        font-size:14px;
+        opacity: 0.62;
+        font-weight: 500;
+        letter-spacing: 0.28px;
+        color: #37375E;
+        text-transform: capitalize;
+     }
+     tr{
+         td{
+            color: #37375E;
+            font-size: 13px;
+            padding: 10px 0;
+             &:first-child{
+                font-weight: 400;
+             }
+             &:nth-child(2){
+                font-weight: 500;
+             }
+            
+         }
+     }
+ }
+}
+
+.notify-sec{
+   display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 25%;
+    flex-direction: column;
+    img{
+      width: 250px;
+      margin: 0 auto;
+    }
+    p{
+      text-align: center;
+      font-size: 25px;
+      padding-top: 20px;
+      font-weight: 600;
+      color: #26264D;
+    }
+    &.active-flag-msg{
+       p{
+         font-size: 20px;
+         padding-top: 20px;
+         font-weight: 500;
+         width: 70%;
+         margin: 0 auto;
+       }
+    }
+}
+
+.due-cell{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+  width: 39px;
+  height: 36px;
+  background-color: #FFDFD8;
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #973521;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.reminder-cell{
+   .mat-icon{
+      margin: 0 auto;
+      cursor: pointer;
+      &:hover{
+         opacity: 0.85;
+      }
+   }
+}
+.sidenav-body{
+   height: calc(100vh - 115px);
+   display: flex;
+   flex-direction: column;
+   background-color: #fff;
+   z-index: 99;
+}
+.sidenav-sucess-flag{
+   position: absolute;
+   left: 0;
+   right: 0;
+   top: 60px;
+}
+.sidenav-content{
+   &.due-list{
+      display: flex;
+      flex-direction: column;
+      padding: 0 !important;
+      display: flex;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+      .due-row{
+         display: flex;
+         padding: 12px 16px;
+         align-items: center;
+         border-bottom: 1px solid #e8e8e8;
+         .emp-icon{
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FEDFDF;
+            border-radius: 50%;
+            font-size:13px;
+            font-weight: 500;
+            color: #37375E;
+            margin: 5px;
+         }
+         .emp-desc{
+            display: flex;
+            flex-direction: column;
+            padding-left: 16px;
+            .name{
+               font-size:13px;
+               font-weight: 400;
+               color: #37375E;
+            }
+            .mail{
+               font-weight: 500;
+               color: #37375E;
+            }
+         }
+      }
+   }
+} 

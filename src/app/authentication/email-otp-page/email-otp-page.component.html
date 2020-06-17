@@ -1,0 +1,15 @@
+<div *ngIf="showSpinner" class="spinner-border"></div>
+<div *ngIf="!showSpinner">
+    <h1 class="heading">Check your email!</h1>
+    <p class="sub-info">We've sent a 6-digit confirmation code to <br/> parameshwer19+5@gmail.com. It will expire shortly, soon enter it soon.</p>
+    <form class="w-100" action="">
+        <ng-otp-input  #ngOtpInput  (onInputChange)="onOtpChange($event)"  [config]="{length:6}"></ng-otp-input>
+        <div class="btn-group">
+            <button class="login-btn" (click)="onSubmit()">Next <i class="fa fa-arrow-right"></i></button>        
+        </div>
+        <p class="sub-info-small">Keep this window open while checking for your code. <br/> Remember to try your spam folder!</p>    
+        <div class="btn-group">    
+        <p class="forgot-txt" [routerLink]="['/login']">Back</p>
+        </div>
+    </form>
+</div>

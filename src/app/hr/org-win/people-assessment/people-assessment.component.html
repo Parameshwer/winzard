@@ -1,0 +1,273 @@
+<div class="inner-page with-drawer">
+    <mat-horizontal-stepper #stepper class="no-indications">
+        <mat-step *ngIf="!loader && !dataSource?.data?.length">
+            <div class="intial-view">
+                <div class="page-heading">
+                    <h3 class="heading">People Assessment</h3>
+                </div>
+                <div class="view-body">
+                    <img src="../../../../assets/images/tm-icon.svg"/>
+                    <p>This is where you initiate People Assessment Reviews</p>
+                    <button class="custom-btn" matStepperNext>INTIATE</button>
+                </div>
+            </div>
+        </mat-step>
+        <mat-step>
+            <mat-drawer-container class="drawer-container" [hasBackdrop]="true">
+                <mat-drawer-content class="drawer-sidenav-content">
+                    <div class="page-heading">
+                        <h3 class="heading">People Assessment</h3>
+                        <!-- (click)="openUserSidenav(true)" -->
+                        <button mat-button class="custom-btn" (click)="StartNewTalent();">
+                            Start new
+                        </button>
+                    </div>
+                    <ng-container *ngIf="!loader && dataSource?.data?.length">
+                        <table mat-table [dataSource]="dataSource" class="w-100" matSort>
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="sNo">
+                                <th mat-header-cell *matHeaderCellDef >S.no</th>
+                                <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="start">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">Start</th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    {{ element.start | date: "dd/LLL/yyy" }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Weight Column -->
+                            <ng-container matColumnDef="end">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">End</th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    {{ element.end | date: "dd/LLL/yyy" }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="sent">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">Sent to</th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    {{ element.sent }}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="submited">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">
+                                    Submited by
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    {{ element.submited }}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="dueEmp">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Due</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <span class="due-cell" (click)="getDueList(element)">{{
+              element.dueEmp
+            }}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div class="s-{{ element?.status }}">
+                                        <mat-form-field class="custom-input status-field">
+                                            <mat-select [(ngModel)]="element.status"
+                                                (selectionChange)="onStatusChange(element)">
+                                                <mat-option *ngFor="let status of statusList" [value]="status.id">
+                                                    {{ status.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="edit">
+                                <th mat-header-cell *matHeaderCellDef class="text-center">Edit</th>
+                                <td mat-cell *matCellDef="let element" class="reminder-cell text-center">
+                                    <mat-icon (click)="onEdit(element)"
+                                        [ngClass]="{'disable-click':element.status != '1'}">edit
+                                    </mat-icon>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="reminder">
+                                <th mat-header-cell *matHeaderCellDef class="text-center">
+                                    Reminder
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="reminder-cell text-center">
+                                    <mat-icon (click)="onReminder(element)"
+                                        [ngClass]="{'disable-click':element.status != '1'}">
+                                        notifications_none
+                                    </mat-icon>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                        </table>
+                        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+                        <div class="custom-pagination">
+                            <ngb-pagination [(page)]="pageDetails.page" [pageSize]="pageDetails.pageSize"
+                                [collectionSize]="pageDetails.total" (pageChange)="pageChange()"></ngb-pagination>
+                            <mat-form-field class="custom-input status-field">
+                                <mat-select [(value)]="pageDetails.pageSize" (valueChange)="pageItemsChange()">
+                                    <mat-option [value]="5">5 / page</mat-option>
+                                    <mat-option [value]="10">10 / page</mat-option>
+                                    <mat-option [value]="20">20 / page</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </ng-container>
+                    <p class="no-data loader" *ngIf="loader">
+                        <mat-spinner></mat-spinner>
+                    </p>
+                    <ng-container *ngIf="!loader && !dataSource?.data?.length">
+                        <p class="no-data">This is where you initiate People Assessment Reviews</p>
+                    </ng-container>
+                </mat-drawer-content>
+
+                <mat-drawer #drawer mode="over" position="end">
+                    <div class="sidenav-container" style="width: 689px;" *ngIf="!checkActiveTm">
+                        <div class="sidenav-heading">
+                            <span class="title">Start People Assessment</span>
+                            <span class="flex-1"></span>
+                            <mat-icon (click)="closeSidenav()">close</mat-icon>
+                        </div>
+                        <div class="sidenav-body animate__animated " 
+                        [ngClass]="{'animate__fadeOut':intiateSucess}">
+                            <div class="sidenav-content">
+                                <div class="d-flex flex-column" *ngIf="!sideNavLoader">
+                                    <h5 class="heading">Employee List</h5>
+                                    <div class="d-flex">
+                                        <div class="custom-field">
+                                            <label>Select by Grade</label>
+                                            <!--  -->
+                                            <mat-form-field class="custom-input" appearance="none">
+                                                <mat-select multiple placeholder="Select Grade" [formControl]="grades" (selectionChange)="onGradesChages($event)">
+                                                  <mat-select-trigger>
+                                                    {{getDisplayName()}}
+                                                  </mat-select-trigger>
+                                                  <mat-option #allSelected
+                                                        (click)="isSelectAllClicked=true;" [value]="0"
+                                                        [disabled]="disableSelectAll">Select
+                                                        All</mat-option>
+                                                    <mat-option *ngFor="let grade of gradesList" [value]="grade"
+                                                        [disabled]="checkDisable(grade['_id'])"
+                                                       >
+                                                        {{ grade.gradeName }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="custom-field date-field">
+                                            <label>Start Date</label>
+                                            <mat-form-field class="custom-input" appearance="none">
+                                                <input matInput [matDatepicker]="picker" [max]="endDate.value"
+                                                    [formControl]="startDate" placeholder="DD/MM/YYYY"
+                                                    (click)="picker.open()" />
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="custom-field date-field">
+                                            <label>End Date</label>
+                                            <mat-form-field class="custom-input" appearance="none">
+                                                <input matInput [matDatepicker]="picker1" [min]="startDate.value"
+                                                    [formControl]="endDate" placeholder="DD/MM/YYYY"
+                                                    (click)="picker1.open()" />
+                                                <mat-datepicker-toggle matSuffix [for]="picker1">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #picker1></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="filter-check" *ngIf="userInfo?.data?.user?.role == 1">
+                                        <mat-checkbox [(ngModel)]="onlySupervisors"
+                                            (change)="onCheckSupervisors(onlySupervisors)">Only Supervisors
+                                        </mat-checkbox>
+                                    </div>
+                                    <div class="emp-list" *ngIf="empList?.length">
+                                        <table>
+                                            <thead>
+                                                <th>Employee name</th>
+                                                <th>Employee Id</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let emp of empList">
+                                                    <td>
+                                                        <span>{{ emp.fullname }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ emp.empId }}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <p class="no-data loader sideNav-loader" *ngIf="sideNavLoader">
+                                    <mat-spinner></mat-spinner>
+                                </p>
+                            </div>
+                            <div class="sidenav-footer">
+                                <button mat-button class="custom-btn" (click)="intiateTalentMangement()">
+                                    {{talentIntiateBtn}}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="sidenav-sucess-flag animate__animated"
+                            [ngClass]="{'animate__fadeInRightBig':intiateSucess}">
+                            <div class="notify-sec">
+                                <img src="../../../../assets/images/notify.jpeg">
+                                <p>Talent assessment is initated and sent</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidenav-container" style="width: 689px;" *ngIf="checkActiveTm">
+                        <div class="sidenav-heading">
+                            <span class="title">Start People Assessment</span>
+                            <span class="flex-1"></span>
+                            <mat-icon (click)="closeSidenav()">close</mat-icon>
+                        </div>
+                        <div class="sidenav-sucess-flag">
+                            <div class="notify-sec active-flag-msg">
+                                <p>{{checkActiveTm}}</p>
+                            </div>
+                        </div>
+                        </div>
+
+
+                </mat-drawer>
+
+                <mat-drawer #dueSidenav mode="over" position="end">
+                    <div class="sidenav-container" style="width: 361px;">
+                        <div class="sidenav-heading">
+                            <span class="title">People Assessment Due Names ({{ dueEmpList?.length }})</span>
+                            <span class="flex-1"></span>
+                            <mat-icon (click)="closeDueSidenav()">close</mat-icon>
+                        </div>
+                        <div class="sidenav-content due-list">
+                            <div class="due-row" *ngFor="let emp of dueEmpList">
+                                <div class="emp-icon">
+                                    <span>
+                                        {{emp.fullname ? emp?.fullname?.substring(0,2) : ''}}
+                                    </span>
+                                </div>
+                                <div class="emp-desc">
+                                    <span class="name">{{ emp.fullname }}</span>
+                                    <span class="mail">{{ emp.email }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-drawer>
+            </mat-drawer-container>
+        </mat-step>
+
+    </mat-horizontal-stepper>
+</div>

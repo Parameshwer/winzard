@@ -1,0 +1,14 @@
+<form class="w-100" [formGroup]="onBoardForm">
+    <h1 class="heading">Tell us about your company</h1>    
+    <div class="form-group">
+        <label for="userEmail">Company Name*</label>
+        <input type="text" placeholder="Your company" formControlName="companyName" class="form-control" />        
+    </div>
+    <div class="form-group">
+        <label for="userEmail">Company Website*</label>
+        <input type="text" placeholder="www.company.com" formControlName="companyName" class="form-control" />                
+    </div>
+    <div class="btn-group">
+        <button class="login-btn" (click)="onSubmit()">Next <i class="fa fa-arrow-right"></i></button>
+    </div>    
+</form>

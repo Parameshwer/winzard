@@ -1,0 +1,15 @@
+<div class="input-dropdown" dropdown>
+        <input [formControl]="searchCtrl" appNospaces dropdownToggle class="form-control" autocomplete="off" placeholder="{{placeholeder}}">
+        <div class="dropdown-arrow-pos">
+          <i><img src="assets/arrow-down.svg" alt="down"></i>
+        </div>
+        <ul class="list-group" *dropdownMenu>
+          <li [@addForm] class="list-group-item"
+              *ngFor="let list of filteredData | async"
+              (click)="onSelectList(list)">{{list[propName]}}</li>
+          <li [@addForm] *ngIf="!(filteredData | async).length && addNewList && searchCtrl.value"
+              class="list-group-item" (click)="createNewList()">{{searchCtrl.value}}<span class="new-tag">New</span></li>
+              <li  class="list-group-item" *ngIf="!(filteredData | async).length && searchCtrl.value && !addNewList">No Data</li>
+        </ul>
+      </div>
+      

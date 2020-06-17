@@ -1,0 +1,17 @@
+<p class="confirm-txt">{{data?.msg}}</p>
+<div class="confirm-bt-sec">
+    <ng-container *ngIf="data?.type == 'error'">
+        <button mat-button mat-button class="confirm-btn" (click)="closeDialog()">Ok</button>
+    </ng-container>
+    <ng-container *ngIf="data?.type == 'alert'">
+        <button mat-button class="confirm-btn white-btn" (click)="closeDialog()">No</button>
+        <button mat-button class="confirm-btn" (click)="onConfirm()">Yes</button>
+    </ng-container>
+
+    <ng-container *ngIf="data?.type == 'reminder'">
+        <button mat-button class="confirm-btn white-btn" (click)="closeDialog()">Cancel</button>
+        <button mat-button class="confirm-btn" (click)="onConfirm()">Send</button>
+    </ng-container>
+   
+</div>
+

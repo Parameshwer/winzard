@@ -1,0 +1,23 @@
+<form class="w-100" [formGroup]="loginForm">
+  <h1 class="heading">Login to Winzard</h1>
+  <div class="form-group">
+    <label for="userName">Email*</label>
+    <input type="text" placeholder="Enter your email" formControlName="username" class="form-control" />
+  </div>
+  <div class="form-group password-field">
+    <label for="password">Password*</label>
+    <input [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control" placeholder="Password" />
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </div>
+  <p class="forgot-txt" [routerLink]="['/forgotPassword']"> 
+    Forgot Password?
+  </p>
+
+  <div class="btn-group">
+    <button class="login-btn" (click)="onSubmit()">
+      Login
+      <!-- <i class="fa fa-arrow-right"></i> -->
+    </button>
+    <p class="register-txt">Don't have an account <a [routerLink]="['/onboard']" class="signup-anchor">Sign up</a></p>
+  </div>
+</form>

@@ -1,0 +1,299 @@
+<div class="app-inner-container review-page">
+  <div class="page-heading">
+    <h3 class="heading">Talent Manager</h3>
+  </div>
+  <mat-horizontal-stepper #stepper class="no-indications">
+    <mat-step>
+        <div class="intial-view with-out-heading">
+            <div class="view-body" *ngIf="userListLoaded && usersList?.length">
+                <img src="../../../../assets/images/tm-icon.svg"/>
+                <p>It’s time to review your team’s performace</p>
+                <button class="custom-btn captalize" matStepperNext>Start now</button>
+            </div>
+            <div class="view-body no-data-found" *ngIf="userListLoaded && !usersList?.length">
+              <p class="no-data-txt">This is where you review your team and<br/>you’ll be able to do it when initaite the process</p>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step>
+  <div class="inner-page with-drawer review">
+    <div class="talent-review" *ngIf="!loader">
+      <div class="talent-leftsec">
+        <ng-container *ngFor="let each of usersList; let index = index">
+          <div class="review-list" [class.selected]="selectedRow && selectedRow?._id == each._id"
+            (click)="onSelect(each, index)">
+            <div class="icon">
+              <span class="name-circle">
+                {{
+                  each?.employee?.fullname
+                    ? each?.employee?.fullname?.substring(0, 2)
+                    : ""
+                }}
+              </span>
+            </div>
+            <div class="r-sec">
+              <div class="name">{{ each?.employee?.fullname }}</div>
+              <div class="sec">
+                {{ each?.employee?.gender == "M" ? "Male" : "Female" }} | Age
+                {{ each?.employee?.dob }}
+              </div>
+              <div class="sec">
+                <mat-icon class="location-icon">
+                  location_on
+                </mat-icon>
+                {{ each?.employee?.location }}
+              </div>
+            </div>
+            <i class="fa fa-angle-right arrow-right"></i>
+          </div>
+        </ng-container>
+      </div>
+      <div class="talent-contentsec">
+        <form [formGroup]="formGroup">
+          <ng-container *ngIf="selectedRow">
+            <fieldset [disabled]="diableEditable">
+            <div class="questions-sec">
+              <span class="number-circle">01</span>
+              <div class="question-content-sec">
+                <h2>Performance Vs Potential</h2>
+                <ng-container *ngFor="let each of questionSections.performance">
+                  <div class="questions">
+                    <label>{{ each.question }}</label>
+                    <mat-radio-group aria-label="Select an option" formControlName="{{ each['_id'] }}">
+                      <mat-radio-button value="1">Low</mat-radio-button>
+                      <mat-radio-button value="2">Medium</mat-radio-button>
+                      <mat-radio-button value="3">High</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <mat-error class="q-error" *ngIf="
+                      formSubmmitted &&
+                      formGroup.get(each['_id']).hasError('required')
+                    ">This field is mandatory
+                  </mat-error>
+                </ng-container>
+              </div>
+            </div>
+            <div class="questions-sec">
+              <span class="number-circle">02</span>
+              <div class="question-content-sec">
+                <h2>Attrition Vs Impact</h2>
+                <ng-container *ngFor="let each of questionSections.attrition">
+                  <div class="questions">
+                    <label>{{ each.question }}</label>
+                    <mat-radio-group aria-label="Select an option" formControlName="{{ each['_id'] }}">
+                      <mat-radio-button value="1">Low</mat-radio-button>
+                      <mat-radio-button value="2">Medium</mat-radio-button>
+                      <mat-radio-button value="3">High</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <mat-error class="q-error" *ngIf="
+                      formSubmmitted &&
+                      formGroup.get(each['_id']).hasError('required')
+                    ">This field is mandatory
+                  </mat-error>
+                </ng-container>
+              </div>
+            </div>
+            <div class="questions-sec">
+              <span class="number-circle">03</span>
+              <div class="question-content-sec">
+                <h2>Developments Needs</h2>
+                <div class="dev-ques-sec">
+                  <ng-container *ngFor="let each of questionSections.developmentNeeds">
+                    <div class="questions-left">
+                      <label>{{ each.question }}</label>
+                      <div class="text-input">
+                        <textarea placeholder="Illustrate the Development need in 50 words"
+                          formControlName="developNeedsDesc" class="form-control"
+                          [readonly]="formGroup.get(questionSections.developmentNeeds[0]['_id'])
+                          .value != 1"></textarea>
+                        <mat-error class="q-error" *ngIf="
+                          formSubmmitted &&
+                          formGroup.get('developNeedsDesc').hasError('required')
+                        ">This field is mandatory
+                        </mat-error>
+                      </div>
+                    </div>
+                    <div class="questions-right">
+                      <mat-radio-group aria-label="Select an option" formControlName="{{ each['_id'] }}"
+                        (change)="onDevelopValueChange($event)">
+                        <mat-radio-button value="1">Yes</mat-radio-button>
+                        <mat-radio-button value="2">No</mat-radio-button>
+                      </mat-radio-group>
+                      <p class="hit-txt">(if no or other then comment box)</p>
+                      <div class="dropdown-input">
+                        <mat-select class="form-control" formControlName="developFitmentDropdown"
+                          placeholder="Select development area" [disabled]="formGroup.get(questionSections.developmentNeeds[0]['_id'])
+                          .value != 1">
+                          <mat-option *ngFor="let item of developmentAreaList" [value]="item">{{ item }}</mat-option>
+                        </mat-select>
+                        <mat-error class="q-error" *ngIf="
+                          formSubmmitted &&
+                          formGroup.get('developFitmentDropdown').hasError('required')
+                        ">This field is mandatory
+                        </mat-error>
+                      </div>
+                    </div>
+                    <mat-error class="q-error" *ngIf="
+                      formSubmmitted &&
+                      formGroup.get(each['_id']).hasError('required')
+                    ">This field is mandatory
+                    </mat-error>
+                  </ng-container>
+                  <!-- <div class="inner-question" *ngIf="
+                    formGroup.get(questionSections.developmentNeeds[0]['_id'])
+                      .value == 1
+                  ">
+
+
+                  </div> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="questions-sec">
+              <span class="number-circle">04</span>
+              <div class="question-content-sec">
+                <div class="job-sec questions">
+                  <h2>Job Fitment</h2>
+                  
+                    <mat-radio-group aria-label="Select an option" formControlName="{{
+                        questionSections.jobFitment[0]['_id']
+                      }}" (change)="onJobValueChange($event)">
+                      <mat-radio-button value="1">Right</mat-radio-button>
+                      <mat-radio-button value="2">Wrong</mat-radio-button>
+                    </mat-radio-group>
+                    <mat-error class="q-error" *ngIf="
+                        formSubmmitted &&
+                        formGroup
+                          .get(questionSections.jobFitment[0]['_id'])
+                          .hasError('required')
+                      ">This field is mandatory
+                    </mat-error>
+                  
+                </div>
+                <div class="questions ques-input">
+                  <div>
+                    <textarea class="form-control" [readonly]="formGroup.get(questionSections.jobFitment[0]['_id'])
+                    .value != 2" formControlName="jobFitmentDesc"></textarea>
+                    <mat-error class="q-error" *ngIf="
+                        formSubmmitted &&
+                        formGroup.get('jobFitmentDesc').hasError('required')
+                      ">This field is mandatory
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="questions-sec">
+              <span class="number-circle">05</span>
+              <div class="question-content-sec">
+                <h2>Strengths</h2>
+                <div class="mult-fields" *ngFor="let each of questionSections.strengths">
+                  <ng-container formArrayName="{{ each['_id'] }}">
+                    <div class="field-sec">
+                      <textarea [formControlName]="0" class="form-control"
+                        placeholder="Illustrate Strength 1"></textarea>
+                      <mat-error class="q-error" *ngIf="
+                          formSubmmitted &&
+                          formGroup
+                            .get(each['_id'])
+                            .get('0')
+                            .hasError('required')
+                        ">This field is mandatory
+                      </mat-error>
+                    </div>
+                    <div class="field-sec">
+                      <textarea [formControlName]="1" class="form-control"
+                        placeholder="Illustrate Strength 2"></textarea>
+                      <mat-error class="q-error" *ngIf="
+                          formSubmmitted &&
+                          formGroup
+                            .get(each['_id'])
+                            .get('1')
+                            .hasError('required')
+                        ">This field is mandatory
+                      </mat-error>
+                    </div>
+                    <div class="field-sec">
+                      <textarea [formControlName]="2" class="form-control"
+                        placeholder="Illustrate Strength 3"></textarea>
+                      <mat-error class="q-error" *ngIf="
+                          formSubmmitted &&
+                          formGroup
+                            .get(each['_id'])
+                            .get('2')
+                            .hasError('required')
+                        ">This field is mandatory
+                      </mat-error>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="questions-sec">
+              <span class="number-circle">06</span>
+              <div class="question-content-sec">
+                <h2>Weaknesses</h2>
+                <div class="mult-fields" *ngFor="let each of questionSections.weaknesses">
+                  <ng-container formArrayName="{{ each['_id'] }}">
+                    <div class="field-sec">
+                      <textarea [formControlName]="0" class="form-control"
+                        placeholder="Illustrate Weekness 1"></textarea>
+                      <mat-error class="q-error" *ngIf="
+                          formSubmmitted &&
+                          formGroup
+                            .get(each['_id'])
+                            .get('0')
+                            .hasError('required')
+                        ">This field is mandatory
+                      </mat-error>
+                    </div>
+                    <div class="field-sec">
+                      <textarea [formControlName]="1" class="form-control"
+                        placeholder="Illustrate Weekness 2"></textarea>
+                      <mat-error class="q-error" *ngIf="
+                          formSubmmitted &&
+                          formGroup
+                            .get(each['_id'])
+                            .get('1')
+                            .hasError('required')
+                        ">This field is mandatory
+                      </mat-error>
+                    </div>
+                    <div class="field-sec">
+                      <textarea [formControlName]="2" class="form-control"
+                        placeholder="Illustrate Weekness 3"></textarea>
+                      <mat-error class="q-error" *ngIf="
+                          formSubmmitted &&
+                          formGroup
+                            .get(each['_id'])
+                            .get('2')
+                            .hasError('required')
+                        ">This field is mandatory
+                      </mat-error>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          </ng-container>
+        </form>
+        <div class="right-side-footer">
+          <!-- bg-white -->
+          <button class="custom-btn" *ngIf="diableEditable" (click)="makeEditable()">Edit</button>
+          <button class="custom-btn white-btn" *ngIf="!diableEditable" (click)="diableEditable = !diableEditable">Cancel</button>
+          <button class="custom-btn" *ngIf="!diableEditable" (click)="onFormSubmit()">Submit</button>
+        </div>
+      </div>
+    </div>
+    <div class="loader no-data" *ngIf="loader">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  </mat-step>
+  </mat-horizontal-stepper>
+</div>

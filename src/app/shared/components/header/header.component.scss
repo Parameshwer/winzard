@@ -1,0 +1,44 @@
+.logo{
+    width: 205px;
+    text-align: left;
+    font: 95 Black 18px/22px Avenir LT Std;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    .logo-img{
+        max-width: 100%;
+        height: 54px;
+        cursor: pointer;
+        outline:none;
+    }
+}
+.mat-nav-list{
+    .mat-list-item{
+        font-size:14px; 
+        font-weight: 400;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        height: 53px;
+        text-align: center;
+        &.active,
+        &:hover {
+            background: rgba(0,0,0,.04);
+        }
+        &.org-menu{
+            width: 100px;
+            margin-right: 30px;
+        }
+    }
+
+   .icon-menu-link{
+       width: 60px;
+       display: flex;
+       align-items: center;
+   }
+}
+
+.right-menus{
+    display: flex;
+    justify-content: flex-end;
+}
+ 

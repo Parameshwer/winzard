@@ -1,0 +1,415 @@
+<div class="app-inner-container">
+  <div class="page-container insight-talent" *ngIf="!noInsights">
+    <div class="insight-header">
+      <div class="d-flex align-items-center">
+        <h3>Talent Manager</h3>
+        <div class="tabs-container">
+          <a *ngFor="let tab of tabsList" class="tab-item" [class.selected]="filterForm.filterby == tab.path"
+            (click)="onTabsChnage(tab)">{{ tab.name }}</a>
+        </div>
+      </div>
+      <div class="filter-sec">
+        <div class="filter-btn-sec">
+          <label>Filter</label>
+          <button mat-button class="filter-menu-btn" [matMenuTriggerFor]="menu">
+            Select <mat-icon>filter_list</mat-icon>
+          </button>
+          <!-- <button mat-button class="filter-menu-btn" [matMenuTriggerFor]="menu">
+            Select <mat-icon>filter_list</mat-icon>
+          </button> -->
+          <mat-form-field class="custom-input autoComplete-field" appearance="none">
+            <mat-icon class="search-icon" *ngIf="!myControl?.value">search</mat-icon>
+            <mat-icon class="close-icon" *ngIf="myControl?.value" (click)="resetSearch()">close</mat-icon>
+            <input type="text" placeholder="Search Employees" aria-label="Number" matInput 
+            [formControl]="myControl"
+              [matAutocomplete]="auto" />
+            <mat-icon class="save-icon" *ngIf="myControl?.value" (click)="saveSearch()">play_arrow</mat-icon>
+            <!-- <mat-icon>filter_list</mat-icon> -->
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+              <div class="direct-reports" >
+                <mat-checkbox [(ngModel)]="filterForm.directby">Direct Reportess Only</mat-checkbox>
+              </div>
+              
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option.fullname">
+                {{ option.fullname }} - {{ option.empId }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="date-drop">
+          <label>Date</label>
+          <mat-select class="form-control" placeholder="Select Date" [(ngModel)]="talentId"
+            (selectionChange)="search()">
+            <mat-option [value]="row._id" *ngFor="let row of datesList">
+              {{ row.startsurvey | date: "mediumDate" }}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </div>
+    <mat-menu #menu="matMenu" overlapTrigger="false" backdropClass="filter-drop-sec">
+      <mat-card class="example-card p-0" (click)="$event.stopPropagation()">
+        <mat-card-header>
+          <mat-card-title>Filters</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="insights-filter-body" (click)="$event.stopPropagation()">
+            <div class="insights-filter-left">
+              <div class="tile" *ngFor="let each of filterList" (click)="onleftFilterSelect(each)">
+                {{ each.label }}
+              </div>
+            </div>
+            <div class="insights-filter-right">
+              <ng-container *ngIf="selectedFilter?.id == 'gender'">
+                <ng-container *ngFor="let each of rightFilterList.genderList">
+                  <mat-checkbox (change)="
+                      onFilterSelectionChanged($event, each, selectedFilter)
+                    " [checked]="filterForm.gender.includes(each?._id)">{{ each[selectedFilter?.key] }}</mat-checkbox>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="selectedFilter?.id == 'location'">
+                <ng-container *ngFor="let each of rightFilterList.locationList">
+                  <mat-checkbox (change)="
+                      onFilterSelectionChanged($event, each, selectedFilter)
+                    " [checked]="filterForm.location.includes(each?._id)">{{ each[selectedFilter?.key] }}
+                  </mat-checkbox>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="selectedFilter?.id == 'grade'">
+                <ng-container *ngFor="let each of rightFilterList.gradeList">
+                  <mat-checkbox (change)="
+                      onFilterSelectionChanged($event, each, selectedFilter)
+                    " [checked]="filterForm.grade.includes(each?._id)">{{ each[selectedFilter?.key] }}</mat-checkbox>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="selectedFilter?.id == 'ageonnetwork'">
+                <ng-container *ngFor="let each of rightFilterList.ageonnetworkList">
+                  <mat-checkbox (change)="
+                      onFilterSelectionChanged($event, each, selectedFilter)
+                    " [checked]="filterForm.ageonnetwork.includes(each?._id)">{{ each[selectedFilter?.key] }}
+                  </mat-checkbox>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="selectedFilter?.id == 'unit'">
+                <ng-container *ngFor="let each of rightFilterList.unitList">
+                  <mat-checkbox (change)="
+                      onFilterSelectionChanged($event, each, selectedFilter)
+                    " [checked]="filterForm.unit.includes(each?._id)">{{ each[selectedFilter?.key] }}</mat-checkbox>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="resetFilters()">Clear</button>
+          <button mat-button class="primary-txt" (click)="search()">
+            Apply Filters
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-menu>
+    <div class="insight-body">
+      <div class="insight-graph-container">
+        <div class="graph-heading-container">
+          <h3 class="heading">Potential vs Performance</h3>
+          <div class="matrix-btn" *ngIf="filterForm.filterby == 'org'">
+            <button class="custom-btn white-btn" *ngIf="!editable" (click)="makeEditable()">Edit</button>
+            <button class="custom-btn white-btn" *ngIf="editable" (click)="editable = !editable">Cancel</button>
+            <button class="custom-btn" *ngIf="editable" (click)="saveEditable()">Save</button>
+          </div>
+        </div>
+
+        <div class="d-flex">
+          <div class="insight-box">
+            <div class="vertical-title">
+              <code>P<br />o<br />t<br />e<br />n<br />t<br />I<br />a<br />l</code>
+            </div>
+            <div>
+              <div class="drag-container" *ngFor="let each of details?.performanceList">
+                <p>{{ each.label }}</p>
+                <div class="drag-box" *ngFor="let items of each.list">
+                  <div class="drag-list">
+                    <div class="drag-box2">
+                      <ng-container *ngIf="items.data.length > 0">
+                        {{ items.data.length }} ({{ items.percentage}}%)
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="drag-horizontal">
+                <ng-container *ngFor="let each of details?.performanceList">
+                  <p>{{ each.label }}</p>
+                </ng-container>
+              </div>
+              <div class="hz-title"><code>P e r f o r m a n c e</code></div>
+            </div>
+            <!-- <div class="horizantal-title">PotentIal</div> -->
+          </div>
+          <div class="insight-box">
+            <div class="vertical-title">
+              <code>P<br />o<br />t<br />e<br />n<br />t<br />I<br />a<br />l</code>
+            </div>
+            <div cdkDropListGroup>
+              <div class="drag-container" *ngFor="let each of details?.performanceList">
+                <p>{{ each.label }}</p>
+                <div class="drag-box" *ngFor="let items of each.list">
+                  <div cdkDropList [cdkDropListData]="items.data" class="drag-list" cdkDropListSortingDisabled
+                    (cdkDropListDropped)="drop($event,true)" [cdkDropListDisabled]="!editable">
+                    <div class="drag-box2" *ngFor="let item of items.data" cdkDrag>
+                      {{ item.name }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="drag-horizontal">
+                <ng-container *ngFor="let each of details?.performanceList">
+                  <p>{{ each.label }}</p>
+                </ng-container>
+              </div>
+              <div class="hz-title"><code>P e r f o r m a n c e</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="insight-graph-container">
+        <h3 class="heading">Probability of Attrition vs Impact of Attrition</h3>
+        <div class="d-flex">
+          <div class="insight-box">
+            <div class="vertical-title">
+              <code>p<br />r<br />o<br />b<br />a<br />b<br />I<br />l<br />I<br />t<br />y
+              </code>
+            </div>
+            <div>
+              <div class="drag-container" *ngFor="let each of details?.impactList">
+                <p>{{ each.label }}</p>
+                <div class="drag-box" *ngFor="let items of each.list">
+                  <div class="drag-list">
+                    <div class="drag-box2">
+                      <ng-container *ngIf="items.data.length > 0">
+                        {{ items.data.length }} ({{ items.percentage}}%)
+                      </ng-container>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="drag-horizontal">
+                <ng-container *ngFor="let each of details?.impactList">
+                  <p>{{ each.label }}</p>
+                </ng-container>
+              </div>
+              <div class="hz-title"><code>I m p a c t</code></div>
+            </div>
+          </div>
+          <div class="insight-box">
+            <div class="vertical-title">
+              <code>p<br />r<br />o<br />b<br />a<br />b<br />I<br />l<br />I<br />t<br />y
+              </code>
+            </div>
+            <div cdkDropListGroup>
+              <div class="drag-container" *ngFor="let each of details?.impactList">
+                <p>{{ each.label }}</p>
+                <div class="drag-box" *ngFor="let items of each.list">
+                  <div cdkDropList [cdkDropListData]="items.data" class="drag-list" cdkDropListSortingDisabled
+                    (cdkDropListDropped)="drop($event)" [cdkDropListDisabled]="!editable">
+                    <div class="drag-box2" *ngFor="let item of items.data" cdkDrag>
+                      {{ item.name }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="drag-horizontal">
+                <ng-container *ngFor="let each of details?.impactList">
+                  <p>{{ each.label }}</p>
+                </ng-container>
+              </div>
+              <div class="hz-title"><code>I m p a c t</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="insight-graph-container">
+        <h3 class="heading">Development Needs</h3>
+        <div class="d-flex">
+          <div class="insight-box job-fitment developmentNeeds-sec">
+            <div class="job-chart">
+              <canvas id="dNeedsChart" width="300" height="200"></canvas>
+            </div>
+            <div class="job-details">
+              <ng-container *ngFor="
+                  let each of details?.developmentNeedsChart;
+                  let i = index
+                ">
+                <div class="job-sec" [class.right]="i == 0">
+                  <h3>{{ each.label }}</h3>
+                  <div class="job-label" *ngFor="let item of each.list">
+                    {{ item.name }};
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="insight-box developmentNeeds-progress">
+            <div class="d-flex w-100">
+              <div style="width: 50%;">
+                <ng-container *ngFor="let each of details?.developmentNeeds">
+                  <div class="progress-sec">
+                    <div class="progress-bar-container">
+                      <p>{{ each.label }}</p>
+                      <mat-progress-bar mode="determinate" value="{{ each.percentage *2 *10 }}"></mat-progress-bar>
+                    </div>
+                    <div class="progress-info" [ngClass]="{selected: each.label == selectedDevNeeds.label}"
+                      (click)="onDevSelect(each)">
+                      <span>{{ each.percentage }}</span>
+                      <mat-icon>keyboard_arrow_right</mat-icon>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <div class="selectedNeeds-sec" *ngIf="selectedDevNeeds">
+                <h5>
+                  Employees who need {{ selectedDevNeeds.label }} developments
+                </h5>
+                <ng-container *ngFor="let each of selectedDevNeeds.list">
+                  <span>{{ each.name }}</span>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="insight-graph-container">
+        <h3 class="heading">Job Fitment</h3>
+        <div class="d-flex">
+          <div class="insight-box job-fitment">
+            <div class="job-chart">
+              <canvas id="jobChart" width="300" max-height="200"></canvas>
+            </div>
+            <div class="job-details">
+              <ng-container *ngFor="let each of details?.jobFitmentChart; let i = index">
+                <div class="job-sec" [class.right]="i == 0">
+                  <h3>{{ each.label }}</h3>
+                  <div class="job-label" *ngFor="let item of each.list">
+                    {{ item.name }};
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="insight-graph-container">
+        <div class="graph-heading-container">
+          <h3 class="heading">Summary of Recommendations for your review</h3>
+          <div class="matrix-btn" *ngIf="filterForm.filterby == 'org'">
+            <button class="custom-btn" (click)="exportSummary()">Export</button>
+          </div>
+        </div>
+        <div class="summary-main-sec">
+          <div class="summary-section">
+            <div class="item-conatiner">
+              <p class="title">
+                Potential enhancement({{
+                  details?.potentialEnhancement?.length
+                }})
+              </p>
+              <div class="item-body">
+                <span *ngFor="let each of details?.potentialEnhancement">{{
+                  each.name
+                }}</span>
+              </div>
+            </div>
+            <div class="item-conatiner">
+              <p class="title">
+                Performance enhancement({{
+                  details?.performanceEnhancement?.length
+                }})
+              </p>
+              <div class="item-body">
+                <span *ngFor="let each of details?.performanceEnhancement">{{
+                  each.name
+                }}</span>
+              </div>
+            </div>
+            <div class="item-conatiner">
+              <p class="title">
+                Carrer Progression({{ details?.carrerProgression?.length }})
+              </p>
+              <div class="item-body">
+                <span *ngFor="let each of details?.carrerProgression">{{
+                  each.name
+                }}</span>
+              </div>
+            </div>
+            <div class="item-conatiner">
+              <p class="title">PIP({{ details?.pip?.length }})</p>
+              <div class="item-body">
+                <span *ngFor="let each of details?.pip">{{ each.name }}</span>
+              </div>
+            </div>
+            <div class="item-conatiner">
+              <p class="title">Job Fitment({{ details?.jobFitment?.length }})</p>
+              <div class="item-body">
+                <span *ngFor="let each of details?.jobFitment">{{
+                  each.name
+                }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="summary-section">
+            <div class="item-conatiner">
+              <p class="title">
+                Rewards({{ details?.learningReward?.length }})
+              </p>
+              <div class="item-body">
+                <span *ngFor="let each of details?.learningReward">{{
+                  each.name
+                }}</span>
+              </div>
+            </div>
+            <div class="item-conatiner">
+              <p class="title">
+                Retention Plan({{ details?.retentionPlan?.length }})
+              </p>
+              <div class="item-body">
+                <span *ngFor="let each of details?.retentionPlan">{{
+                  each.name
+                }}</span>
+              </div>
+            </div>
+            <div class="item-conatiner">
+              <p class="title">
+                Succession Plan({{ details?.successionPlan?.length }})
+              </p>
+              <div class="item-body">
+                <span *ngFor="let each of details?.successionPlan">{{
+                  each.name
+                }}</span>
+              </div>
+            </div>
+            <div class="item-conatiner">
+              <p class="title">
+                Questionable Position({{
+                  details?.questionablePosition?.length
+                }})
+              </p>
+              <div class="item-body">
+                <span *ngFor="let each of details?.questionablePosition">{{
+                  each.name
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-container no-data-sec" *ngIf="noInsights">
+    <p class="no-data-txt">
+      This is where you review your team and<br />
+      you’ll be able to do it when initaite the process
+    </p>
+  </div>
+</div>
