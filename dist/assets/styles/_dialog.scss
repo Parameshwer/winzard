@@ -1,0 +1,9 @@
+.cdk-overlay-pane {
+    &.confirm-dialog{
+        .mat-dialog-container{
+            border-radius: 50px;
+            box-shadow: none;
+            height: 240px;
+        }
+}
+}
