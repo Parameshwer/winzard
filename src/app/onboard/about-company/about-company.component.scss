@@ -1,0 +1,16 @@
+.company-sizes {
+    text-align: center;
+    width: 400px;
+    margin: 0 auto;
+    .company-size {
+        display: inline-block;
+        border: 1px solid #afadad;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 30px;
+        cursor: pointer;
+        &.selected {
+            background: #ccc;
+        }
+    }
+}

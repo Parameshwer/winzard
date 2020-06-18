@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as moment from 'moment'; // add this 1 of 4
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-about-company-financial-year',

@@ -1,15 +1,17 @@
 <form class="w-100" [formGroup]="companyForm">
-    <h1 class="heading">What does your company do?</h1>
-    <div class="form-group">        
-        <select class="custom-select" id="whatCompany" formControlName="companyType">
-            <option value="">Select below</option> 
-            <option *ngFor="let companyType of companyTypes" [value]="companyType.id">{{companyType.name}}</option>           
-        </select>
+    <div class="what-company">
+        <h1 class="heading">What does your company do?</h1>
+        <div class="form-group">
+            <select class="custom-select" id="whatCompany" formControlName="companyType">
+                <option value="">Select below</option>
+                <option *ngFor="let companyType of companyTypes" [value]="companyType.id">{{companyType.name}}</option>
+            </select>
+        </div>
+        <div class="btn-group">
+            <button class="login-btn" (click)="onSubmit()">Next <i class="fa fa-arrow-right"></i></button>
+        </div>
+        <div class="btn-group">
+            <p class="forgot-txt" [routerLink]="['/login']">Back</p>
+        </div>
     </div>
-    <div class="btn-group">
-        <button class="login-btn" (click)="onSubmit()">Next <i class="fa fa-arrow-right"></i></button>
-    </div>
-    <div class="btn-group">            
-        <p class="forgot-txt" [routerLink]="['/login']">Back</p>
-      </div>
 </form>
