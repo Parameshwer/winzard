@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { AuthService } from '../../authentication/auth.service';
 
 @Component({
   selector: 'app-about-company',
@@ -13,17 +14,10 @@ export class AboutCompanyComponent implements OnInit {
   public months: Array<string> = moment.months();
   public years: Array<number> = [];
   public frequencies: Array<object> = [{id: 1, name: "Monthly"},{id: 2, name: "Quaterly"}];
-  public financialYear;
-  public nextSection = "whatCompany";
-  public companySections = [
-    {id: 1, name: "aboutCompany","show": true},
-    {id: 2, name: "whatCompany", "show": false},
-    {id: 3, name: "companySize", "show": false},
-    {id: 4, name: "accountUrl", "show": false},
-    {id: 5, name: "companyFinancialYear", "show": false}
-  ];
+  public financialYear;  
+
   public activeSectionsObj = {
-    "aboutCompany": {"show": false},
+    "aboutCompany": {"show": true},
     "whatCompany": {"show": false},
     "companySize": {"show": false},
     "accountUrl": {"show": false},
@@ -51,7 +45,8 @@ export class AboutCompanyComponent implements OnInit {
   ];
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private _service: AuthService
   ) { }
 
   ngOnInit() {
@@ -68,7 +63,45 @@ export class AboutCompanyComponent implements OnInit {
     this.generateYears();
     this.setActiveSection();
   }
-
+  onNext(sectionName) {
+    console.log(sectionName);
+    let msg = "";
+    if(sectionName == "whatCompany") {
+      if(!this.onBoardForm.get('companyName').value){
+        msg = "Please enter company name"
+        this._service.openConfirmDialog(msg, 'error');
+      } else if(!this.onBoardForm.get('companyWebsite').value){
+        msg = "Please enter company website"
+        this._service.openConfirmDialog(msg, 'error');
+      } else {
+        this.resetAllSections();
+        this.activeSectionsObj[sectionName]['show'] = true;
+      }
+    } else if(sectionName == "companySize") {
+      if(!this.onBoardForm.get('companyType').value){
+        msg = "Please select company type"
+        this._service.openConfirmDialog(msg, 'error');
+      } else {
+        this.resetAllSections();
+        this.activeSectionsObj[sectionName]['show'] = true;
+      }
+    } else if(sectionName == "accountUrl") {
+      this.resetAllSections();
+      this.activeSectionsObj[sectionName]['show'] = true;
+    } else if(sectionName == 'companyFinancialYear') {
+      if(!this.onBoardForm.get('companyTeamName').value){
+        msg = "Please select company team name"
+        this._service.openConfirmDialog(msg, 'error');
+      } else if(!this.onBoardForm.get('termsOfuse').value){
+        msg = "Please select terms of use"
+        this._service.openConfirmDialog(msg, 'error');
+      } else {
+        this.resetAllSections();
+        this.activeSectionsObj[sectionName]['show'] = true;
+      }
+    }  
+  }
+  
   setActiveSection() {
     if(this.activeSectionIndex == this.activeSectionsArray.length - 1) {
       return false;
@@ -110,22 +143,48 @@ export class AboutCompanyComponent implements OnInit {
         this.financialYear = startYear.format("MMM YYYY") +'  - '+ endYear.format("MMM YYYY");
     }        
   }
-  onCompanySizeSelect(size) {
+  onCompanySizeSelect(index) {
     this.companySizes.map((companySize) => {
       companySize['selected'] = false;
     });    
-    size.selected = true;
+    this.companySizes[index]['selected'] = true;
   }
-  onNext() {
-    this.companySections.map((section,index) => {
-      if(this.nextSection == section.name) {
-        console.log(section,index);
-        console.log(section);
-      }
-    })
-  }
+
   onBack() {
     this.activeSectionIndex = this.activeSectionIndex - 1;        
     this.showActiveSection();
+  }
+  onFinish() {
+    let msg = "";
+    if (this.onBoardForm.valid) {
+      let params = {
+        category: this.onBoardForm.value.companyType,
+        companyname: this.onBoardForm.value.companyName,
+        companyurl: this.onBoardForm.value.companyWebsite,
+        peopleCount: "2000+",
+        teamurl: this.onBoardForm.value.companyTeamName
+      };
+      this._service.getUpdateCompanyInfo(params)
+        .subscribe(res => {   
+          console.log(res);       
+          if (res && res.data) {
+            
+          }
+        }, err => {
+          console.log('HTTP Error', err);
+        })
+    } else if(!this.onBoardForm.get('startMonth').value){
+      msg = "Please enter start month"
+      this._service.openConfirmDialog(msg, 'error');
+    } else if(!this.onBoardForm.get('startYear').value){
+      msg = "Please enter start year"
+      this._service.openConfirmDialog(msg, 'error');
+    } else if(!this.onBoardForm.get('startYear').value){
+      msg = "Please enter start year"
+      this._service.openConfirmDialog(msg, 'error');
+    } else if(!this.onBoardForm.get('subgoalFrequency').value){
+      msg = "Please enter sub goal frequency"
+      this._service.openConfirmDialog(msg, 'error');
+    }
   }
 }

@@ -11,10 +11,10 @@ import { ConfirmDialogComponent } from "../shared/components/confirm-dialog/conf
 })
 export class AuthService {
   private baseUrl = environment.baseUrl;
+  public userSignUpInfo = {email: "",otp: ""};
   constructor(private http: HttpClient, private dialog: MatDialog) {}
 
-  openConfirmDialog(msg, type, autoClose?, callback?): void {
-    console.log(17);
+  openConfirmDialog(msg, type, autoClose?, callback?): void {    
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: "600px",
       panelClass: "confirm-dialog",
@@ -49,7 +49,18 @@ export class AuthService {
     let path = this.baseUrl + "getResetPassword";
     return this.http.post<any>(path, body).pipe(catchError(this.handleError));
   }
-  
+  getCheckEmailSignup(body): Observable<any> {
+    let path = this.baseUrl + "getCheckEmailSignup";
+    return this.http.post<any>(path, body).pipe(catchError(this.handleError));
+  }
+  getUpdateUser(body): Observable<any> {
+    let path = this.baseUrl + "getUpdateUser";
+    return this.http.post<any>(path, body).pipe(catchError(this.handleError));
+  }
+  getUpdateCompanyInfo(body): Observable<any> {
+    let path = this.baseUrl + "getUpdateCompanyInfo";
+    return this.http.post<any>(path, body).pipe(catchError(this.handleError));
+  }
   
   handleError(error) {
     let errorMessage = "";

@@ -1,15 +1,24 @@
-<form class="w-100" [formGroup]="welcomeWinzardForm">
-    <h1 class="heading">Welcome to Winzard</h1>
-    <p class="sub-info">Let's get your account setup, It will take you a minute.</p>
-    <div class="form-group">
-        <label for="userEmail">Full Name*</label>
-        <input type="text" placeholder="Enter your full name" formControlName="name" class="form-control" />       
-    </div>
-    <div class="form-group">
-        <label for="userEmail">New Password*</label>
-        <input type="text" placeholder="Your Password" formControlName="password" class="form-control" />       
-    </div>
-    <div class="btn-group">
-        <button class="login-btn" (click)="onSubmit()">Next <i class="fa fa-arrow-right"></i></button>
-    </div>  
-</form>
+<div *ngIf="showSpinner" class="spinner-border"></div>
+<div *ngIf="!showSpinner">
+    <form class="w-100" [formGroup]="welcomeWinzardForm">
+        <h1 class="heading">Welcome to Winzard</h1>
+        <p class="sub-info">Let's get your account setup, It will take you a minute.</p>
+        <div class="form-group">
+            <label for="userEmail">Full Name*</label>
+            <input type="text" placeholder="Enter your full name" formControlName="fullname" class="form-control" />       
+        </div>
+        <div class="form-group  password-field">
+            <label for="userEmail">New Password*</label>
+            <ng-template #tipContent>            
+                <p>1. Password should be min 8 and max 10 charecters in length.</p> 
+                <p>2. Password should have minimum one uppercase letter, one digit, one lowercase letter.</p> 
+                <p>3. Password should not have any spaces and special charecters.</p>           
+            </ng-template>
+            <input [type]="chide ? 'password' : 'text'" placeholder="Your Password" formControlName="password" class="form-control" />       
+            <mat-icon [ngbTooltip]="tipContent" container="body" placement="top-right" matSuffix (click)="chide = !chide">{{chide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </div>
+        <div class="btn-group">
+            <button class="login-btn" (click)="onSubmit()">Next <i class="fa fa-arrow-right"></i></button>
+        </div>  
+    </form>
+</div>

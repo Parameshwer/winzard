@@ -191,6 +191,7 @@ body {
             margin-bottom: 60px;
         }
     }
+
     &.onboard-section    {
         max-width: 500px;
         .sub-info {
@@ -232,5 +233,11 @@ body {
     text-align: left;
     p {
         margin: 0;
+    }
+}
+.company-url-tip {
+    .tooltip-inner {
+        max-width: 200px;
+        width: 200px;
     }
 }

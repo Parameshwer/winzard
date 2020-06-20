@@ -1,4 +1,6 @@
-<form class="w-100" [formGroup]="onBoardForm">
+<div *ngIf="showSpinner" class="spinner-border"></div>
+<div *ngIf="!showSpinner">
+  <form class="w-100" [formGroup]="signUpForm">
     <h1 class="heading">Enter your work email</h1>
     <p class="sub-info">Please use your work email so we can connect you with your team in Winzard.</p>
     <div class="form-group">
@@ -6,10 +8,12 @@
       <input type="text" placeholder="Enter your email" formControlName="email" class="form-control" />
       <div class="btn-group">
         <button class="login-btn" (click)="onSubmit()">Submit <i class="fa fa-arrow-right"></i></button>
-      </div>            
+      </div>
     </div>
-    <div class="btn-group">            
+    <div class="btn-group">
       <p class="forgot-txt" [routerLink]="['/login']">Back</p>
     </div>
-    <p class="sub-info-small">By signing up I/We agree to the Winzard  <a [routerLink]="['/privacyPolicy']">Privacy Policy</a> and <a [routerLink]="['/termsOfServices']">Terms of Services</a></p>
+    <p class="sub-info-small">By signing up I/We agree to the Winzard <a [routerLink]="['/privacyPolicy']">Privacy
+        Policy</a> and <a [routerLink]="['/termsOfServices']">Terms of Services</a></p>
   </form>
+</div>

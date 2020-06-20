@@ -11,19 +11,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { AppDateAdapter, APP_DATE_FORMATS } from './date.adapter';
-
+import  { EmailOtpPageComponent } from '../authentication/email-otp-page/email-otp-page.component';
+import { NgOtpInputModule } from  'ng-otp-input';
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent, TasksComponent, CustomDropdownComponent, ConfirmDialogComponent],
+  declarations: [EmailOtpPageComponent,HeaderComponent, SidebarComponent, TasksComponent, CustomDropdownComponent, ConfirmDialogComponent],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
     MaterialModule,
-    NgbModule
+    NgbModule,
+    NgOtpInputModule
   ],
   exports: [FormsModule, ReactiveFormsModule, MaterialModule,
     NgbModule,
+    EmailOtpPageComponent,
     HeaderComponent, SidebarComponent, TasksComponent, CustomDropdownComponent],
   entryComponents: [ConfirmDialogComponent],
   providers: [
