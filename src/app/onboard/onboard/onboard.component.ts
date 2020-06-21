@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class OnboardComponent implements OnInit {
   public onBoardForm: FormGroup;
   public showSpinner: boolean = false;
+  public hideOnBoardSection: boolean = false;
   
   
   public signUpSections = {
@@ -35,6 +36,9 @@ export class OnboardComponent implements OnInit {
   onSubmitHandler($event) {
     this.resetAllSections();
     this.signUpSections[$event.to]["show"] = true;
+  }
+  onFinishHandler() {
+    this.hideOnBoardSection = true;
   }
   resetAllSections() {
     this.activeSignupArray.map((section) => {

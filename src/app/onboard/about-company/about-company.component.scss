@@ -4,11 +4,12 @@
     margin: 0 auto;
     .company-size {
         display: inline-block;
-        border: 1px solid #afadad;
+        border: 0.5px solid #aaaeb9;
         padding: 10px 15px;
-        margin: 5px;
+        margin: 6px;
         border-radius: 30px;
         cursor: pointer;
+        color: #37375e;
         &.selected {
             background: #ccc;
         }

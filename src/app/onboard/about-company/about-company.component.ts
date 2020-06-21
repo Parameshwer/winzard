@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,EventEmitter,Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { AuthService } from '../../authentication/auth.service';
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-about-company',
@@ -15,13 +16,16 @@ export class AboutCompanyComponent implements OnInit {
   public years: Array<number> = [];
   public frequencies: Array<object> = [{id: 1, name: "Monthly"},{id: 2, name: "Quaterly"}];
   public financialYear;  
+  public showSpinner: boolean = false;
+  @Output() onFinishEvent = new EventEmitter<any>();
 
   public activeSectionsObj = {
-    "aboutCompany": {"show": true},
+    "aboutCompany": {"show": false},
     "whatCompany": {"show": false},
     "companySize": {"show": false},
     "accountUrl": {"show": false},
     "companyFinancialYear": {"show": false},
+    "createAccount": {"show": true}
   };
   
   public activeSectionsArray = Object.keys(this.activeSectionsObj);
@@ -86,8 +90,14 @@ export class AboutCompanyComponent implements OnInit {
         this.activeSectionsObj[sectionName]['show'] = true;
       }
     } else if(sectionName == "accountUrl") {
-      this.resetAllSections();
-      this.activeSectionsObj[sectionName]['show'] = true;
+      if(_.find(this.companySizes,{selected: true})) {
+        this.resetAllSections();
+        this.activeSectionsObj[sectionName]['show'] = true;
+      } else {
+        msg = "Please select company size"
+        this._service.openConfirmDialog(msg, 'error');
+      }
+      
     } else if(sectionName == 'companyFinancialYear') {
       if(!this.onBoardForm.get('companyTeamName').value){
         msg = "Please select company team name"
@@ -130,16 +140,11 @@ export class AboutCompanyComponent implements OnInit {
   }
   generateCurrentFinancialYear() {
     let formObj = this.onBoardForm.value;
-    if(formObj && formObj.startMonth && formObj.startYear && formObj.subgoalFrequency) {
+    if(formObj && formObj.startMonth && formObj.startYear) {
         let startYear = moment(`01-${formObj.startMonth}-${formObj.startYear}`,"DD-MMMM-YYYY"),
             endYear;            
-        if(formObj.subgoalFrequency == 1) {
-          endYear = startYear.clone().add(11, 'M');
-        } else {
-          endYear = startYear.clone().add(3, 'M');
-        }
-        console.log(startYear.format("MM/DD/YYYY"));
-        console.log(endYear.format("MM/DD/YYYY"));
+        
+        endYear = startYear.clone().add(11, 'M');        
         this.financialYear = startYear.format("MMM YYYY") +'  - '+ endYear.format("MMM YYYY");
     }        
   }
@@ -156,6 +161,7 @@ export class AboutCompanyComponent implements OnInit {
   }
   onFinish() {
     let msg = "";
+    this.showSpinner = true;
     if (this.onBoardForm.valid) {
       let params = {
         category: this.onBoardForm.value.companyType,
@@ -168,7 +174,9 @@ export class AboutCompanyComponent implements OnInit {
         .subscribe(res => {   
           console.log(res);       
           if (res && res.data) {
-            
+            this.showSpinner = false;            
+            //this.router.navigate(['onboard/createAccount']);
+            this.onFinishEvent.emit();
           }
         }, err => {
           console.log('HTTP Error', err);

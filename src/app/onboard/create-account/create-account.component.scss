@@ -1,0 +1,34 @@
+.create-account {
+    width: 900px;
+    height: 400px;
+    margin: 0 auto;
+    background: #7373e8;
+    color: #fff;
+    display: table;
+    text-align: center;
+    border-radius: 16px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    .create-account-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        svg {
+            margin-bottom: 40px;
+        }
+        h2{
+            font-size:28px;
+        }
+        p {
+            opacity: 0.7;
+            font-weight: 300;
+            font-size: 13px;
+        }
+    }
+}

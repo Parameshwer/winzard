@@ -28,12 +28,15 @@ export class EnterEmailComponent implements OnInit {
       this.showSpinner = true;
       this._service.getCheckEmailSignup(this.signUpForm.value)
         .subscribe(res => {     
-          if (res && res.data) {
-            this.showSpinner = false;
+          this.showSpinner = false;
+          if (res && res.data) {            
             this._service.userSignUpInfo["email"] = this.signUpForm.value.email;
             this.onSubmitEvent.emit({type: "next",to:"emailOtp"});
           }
-        }, err => {console.log('HTTP Error', err);})
+        }, err => {
+          console.log('HTTP Error', err);
+          this.showSpinner = false;
+        })
     } else if(!this.signUpForm.get('email').value){
       msg = "Please enter User Email"
       this._service.openConfirmDialog(msg, 'error');

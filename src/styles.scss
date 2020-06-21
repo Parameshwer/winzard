@@ -46,6 +46,7 @@ body {
         right: 12px;
         color: #a6aebf;
         cursor: pointer;
+        font-size: 24px;        
     }
 }
 .authentication-section {
@@ -53,7 +54,7 @@ body {
     height: 100%;
     max-width: 350px;
     margin: 0 auto;   
-    &.email-otp-page {
+    &.email-otp-page,.email-otp-page {
         max-width: 560px;
         text-align: center;
         ng-otp-input {
@@ -61,9 +62,10 @@ body {
                 input {
                    
                     &.otp-input {
-                        border: 1px solid #9b9bae;
+                        border: 1px solid #9f9fc1;
                         border-radius: 0;         
-                        font-size: 20px;                                       
+                        font-size: 20px;                                      
+                        color: #495057;
                         &:focus {
                             outline: 0;
                         }
@@ -72,24 +74,24 @@ body {
                             border-right: 0;                            
                         }                
                         &:nth-child(1) {
-                            border-radius: 5px 0 0 5px;
+                            border-radius: 3px 0 0 3px;
                         }
                         &:nth-child(2) {
-                            border-radius: 0 5px 5px 0;
+                            border-radius: 0 3px 3px 0;
                             margin-right: 20px;
                         }        
                         &:nth-child(3) {
-                            border-radius: 5px 0 0 5px;
+                            border-radius: 3px 0 0 3px;
                         } 
                         &:nth-child(4) {
-                            border-radius: 0 5px 5px 0;
+                            border-radius: 0 3px 3px 0;
                             margin-right: 20px;
                         }        
                         &:nth-child(5) {
-                            border-radius: 5px 0 0 5px;
+                            border-radius: 3px 0 0 3px;
                         }        
                         &:nth-child(6) {
-                            border-radius: 0 5px 5px 0;
+                            border-radius: 0 3px 3px 0;
                         }                        
                     }
                     
@@ -102,12 +104,12 @@ body {
         font-size: 28px;
         font-weight: 800;        
         letter-spacing: 0px;
-        color: #000;
-        margin-bottom: 100px;
+        color: #282856;
+        margin-bottom: 70px;
     }
     .forgot-txt {
         text-align: right;
-        margin: 10px 0px;
+        margin: -10px 0px 0;  
         font-size: 15px;
         font-weight: 500;
         font-family: "Roboto", sans-serif !important;
@@ -115,6 +117,9 @@ body {
         color: #0e71eb;
         outline: none;
         cursor: pointer;
+        &.back-btn {
+            margin-top: 50px;
+        }
     }
     .btn-group {
         position: relative;
@@ -136,15 +141,25 @@ body {
     form {
         label {
             font-size: 15px;
-            letter-spacing: 0.6px;
-            color: #37375e;
+            letter-spacing: 0.3px;            
             font-family: "Roboto", sans-serif !important;
-            font-weight: 500;
-            margin-bottom: 0;
+            color: #37375E;
+        }
+        .custom-select {
+            width: 390px;
+            height: 62px;
+            border: 0.5px solid #C7CAD1;
+            padding: 16px;
+            color: #37375E;
+            font-size: 16px;
+            border-radius: 4px;
+            option {
+                padding: 10px;
+            }
         }
         .form-group {
             position: relative;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.3rem;
             .invalid-feedback {
                 position: absolute;
                 bottom: -19px;
@@ -153,17 +168,48 @@ body {
             }
         }
         .form-control {
-            letter-spacing: 0px;
-            color: #37375e;
-            font-size: 16px;
-            height: 50px;
+            &::placeholder {
+                opacity: 0.57;
+                color: #37375E;     
+              }
+              
+              &:-ms-input-placeholder {
+                opacity: 0.57;
+                color: #37375E;     
+              }
+              
+              &::-ms-input-placeholder {
+                opacity: 0.57;
+                color: #37375E;     
+              }
+            letter-spacing: 0px;                  
+            height: 52px;
             border-radius: 4px;
-            border: 1px solid #eaeaea;
+            border: 0.5px solid #A3A8B2;           
+            padding: 15px;
             &:focus {
                 box-shadow: 0 0 0 1px rgba(0,123,255,.25);
             }
             &.is-invalid + mat-icon {
                 opacity: 0;
+            }
+        }
+        .sign-up-formg-roup {
+            position: relative;
+            margin-bottom: 45px;
+            .btn-group {
+                position: absolute;
+                right: 0;
+                top: 0;
+                margin: 0;
+                .login-btn {
+                    margin-top: 31px;
+                    line-height: 51px;
+                    width: 105px;
+                    border-radius: 3px;
+                    color: #282856;
+                    font-weight: 400;
+                }
             }
         }
     }
@@ -175,11 +221,16 @@ body {
         a.signup-anchor {
             color: #3b97ff;
             cursor: pointer;
+            &:hover {
+                text-decoration: none;
+            }
         }
     }
     .sub-info-small {
-        font-size: 13px;
-        color: #9192a7;
+        font-size: 11px;
+        opacity: 1;
+        color: #37375E;
+        text-align: center;
     }
     
     app-email-otp-page, app-change-password-page,app-forgot-password,&.onboard-section {        
@@ -189,6 +240,36 @@ body {
         }
         .sub-info {
             margin-bottom: 60px;
+            color: #37375E;
+            opacity: 1;
+            font-size: 16px;            
+            font-weight: 300;
+            text-align: center;
+        }
+    }
+
+    app-email-otp-page {        
+        .heading {            
+            margin-bottom: 10px;
+        }
+        .sub-info {
+            margin-bottom: 60px;            
+        }
+    }
+    app-change-password-page {        
+        .heading {            
+            margin-bottom: 10px;
+        }
+        .sub-info {
+            margin-bottom: 60px;            
+        }
+    }
+    app-forgot-password {        
+        .heading {            
+            margin-bottom: 10px;
+        }
+        .sub-info {
+            margin-bottom: 60px;            
         }
     }
 
@@ -196,13 +277,98 @@ body {
         max-width: 500px;
         .sub-info {
             text-align: center;            
-        }        
+        }
+        app-enter-email {
+            form {
+                width: 420px;
+                margin: 0 auto;
+            }
+        }
+        app-welcome-winzard {
+            form {
+                width: 420px;
+                margin: 0 auto;
+                .form-group {
+                    width: 360px;
+                    margin: 20px auto;
+                }
+            }
+        }
+        app-about-company {
+            form {                
+                margin: 0 auto;
+                .form-group {                    
+                    margin: 20px auto;
+                    .input-group-text {
+                        background: #CBE2FE;
+                        color: #37375E;
+                        font-size: 20px;
+                    }
+                }
+                .heading {
+                    margin-bottom: 50px;
+                    line-height: 35px;
+                }
+            }
+            .company-size-page {
+                width: 400px;
+                margin: 0 auto;
+            }
+            .account-url {
+                width: 500px;
+                margin: 0 auto;
+            }
+            .what-company {
+                .form-group {
+                    text-align: center;
+                }
+            }
+            .about-company {
+                width: 425px;
+                margin: 0 auto;
+            }
+            .account-url{
+                .heading{
+                    margin-bottom: 10px;
+                }
+                .form-check {
+                    .form-check-input {
+                        height: 22px;
+                        width: 22px;
+                    }
+                    .form-check-label {                    
+                        font-size: 13px;
+                        margin-top: 7px;
+                        margin-left: 10px;
+                    }
+                }
+                
+            }
+            .company-fancial-year {
+                width: 500px;
+                margin: 0 auto;
+                .form-group {
+                    .custom-select {
+                        width: 210px;
+                    }
+                    label {
+                        
+                    }                   
+                }
+                .btn-group {
+                    .back-btn {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
     }
     &.change-password-page {
-        max-width: 320px;
+        max-width: 390px;
         app-change-password-page {
             .heading {                
-                margin-bottom: 20px;
+                margin-bottom: 40px;
+                font-weight: bold;
             }
         }
     }
@@ -241,3 +407,8 @@ body {
         width: 200px;
     }
 }
+// .what-company,.company-size,.what-company,.company-fancial-year {
+//     .heading {
+//         margin-bottom: 30px !important;
+//     }
+// }

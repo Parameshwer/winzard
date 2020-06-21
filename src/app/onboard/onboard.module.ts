@@ -11,10 +11,13 @@ import { CompanySizeComponent } from './company-size/company-size.component';
 import { AccountUrlComponent } from './account-url/account-url.component';
 import { WhatCompanyComponent } from './what-company/what-company.component';
 import { AboutCompanyFinancialYearComponent } from './about-company-financial-year/about-company-financial-year.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 
 @NgModule({
-  declarations: [OnboardComponent, EnterEmailComponent, WelcomeWinzardComponent, AboutCompanyComponent, CompanySizeComponent, AccountUrlComponent, WhatCompanyComponent, AboutCompanyFinancialYearComponent],
+  declarations: [OnboardComponent, EnterEmailComponent, WelcomeWinzardComponent, AboutCompanyComponent, CompanySizeComponent, AccountUrlComponent, WhatCompanyComponent, AboutCompanyFinancialYearComponent, PrivacyPolicyComponent, TermsOfUseComponent, CreateAccountComponent],
   imports: [
     CommonModule,
     OnboardRoutingModule,

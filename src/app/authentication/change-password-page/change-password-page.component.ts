@@ -12,7 +12,8 @@ import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 export class ChangePagePasswordPageComponent implements OnInit {
   public changePasswordForm: FormGroup;
   public loggedInUserInfo = JSON.parse(localStorage.getItem("userInfo"));
-
+  chide: boolean = true;
+  nhide: boolean = true;
   constructor(
     private fb: FormBuilder,
     private router: Router,

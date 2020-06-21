@@ -27,10 +27,11 @@ export class ForgotPasswordComponent implements OnInit {
     // stop here if form is invalid
     this.showSpinner = true;
     if (this.forgotPasswordForm.valid) {
+      this._service.userSignUpInfo.email = this.forgotPasswordForm.value.email;
       this._service.getForgotPassword(this.forgotPasswordForm.value)
         .subscribe(res => {   
           console.log(res);       
-          if (res && res.data) {
+          if (res && res.success) {
             this.showSpinner = false;
             this.router.navigate(['/emailOtp']);
           }
