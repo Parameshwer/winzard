@@ -1,0 +1,31 @@
+<div class="container-fluid" [ngClass]="{'from-dialog': from}" *ngIf="!hideOnBoardSection">
+    <div class="row align-items-center d-flex">
+        <div class="col-md-12 col-sm-12 upload-info">
+            <h2>To create multiple users at once</h2>
+            <ol>
+                <li>download sample format sheet</li>
+                <li>fill user details accordingly</li>
+                <li>upload file in .csv format</li>
+            </ol>
+            <div class="btn-group">
+                <button class="download-btn" (click)="downloadSampleFile()">                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="27" viewBox="0 0 19 27"><defs><style>.a{fill:#fff;fill-rule:evenodd;}</style></defs><g transform="translate(-7 -3)"><path class="a" d="M16,25.05,12.75,21.8l-.75.75,4.5,4.5,4.5-4.5-.75-.75L17,25.05V14H16V25.05ZM19,3H9.009A2.008,2.008,0,0,0,7,5.007V27.993A2,2,0,0,0,9,30H24a2,2,0,0,0,2-2V11H21.006A2,2,0,0,1,19,9V3Zm1,0V9a1,1,0,0,0,.991,1H26L20,3Z"/></g></svg>
+                    Download
+                </button>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 upload-area">
+            <ng-container #flow="flow" [flowConfig]="{target: ''}"></ng-container>
+            <!-- <input type="file" flowButton [flow]="flow.flowJs" [flowAttributes]="{accept: 'image/*'}"> -->
+            <div class="drop-area" [ngClass]="{'pointers-eventn-none': true}" flowDrop [flow]="flow.flowJs">
+                <div class="drop-area-inner" flowButton [flowAttributes]="{accept: 'xlsx'}" [flow]="flow.flowJs">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="79" viewBox="0 0 80 79"><defs><style>.a{fill:#e2e7ff;}.b{fill:#5f78f5;}</style></defs><g transform="translate(-872 -269)"><ellipse class="a" cx="40" cy="39.5" rx="40" ry="39.5" transform="translate(872 269)"/><g transform="translate(899.9 294)"><path class="b" d="M23.723,14.533V26.577a2.317,2.317,0,0,1-2.5,2.523H2.6A2.314,2.314,0,0,1,.1,26.589V8.295a3.233,3.233,0,0,1,.989-2.386L6.031.966A3.113,3.113,0,0,1,8.361,0c4.3.011,8.59,0,12.9,0a2.318,2.318,0,0,1,2.477,2.488C23.723,6.5,23.723,10.522,23.723,14.533Zm-1.818.023V2.682c0-.784-.08-.864-.886-.864-4.181,0-8.374-.011-12.556.023a1.868,1.868,0,0,0-1.193.489C5.622,3.92,4,5.534,2.407,7.193a1.868,1.868,0,0,0-.489,1.193C1.884,14.408,1.9,20.43,1.9,26.452c0,.75.091.841.864.841H21.053c.761,0,.852-.091.852-.852C21.916,22.476,21.905,18.51,21.905,14.556Z"/><path class="b" d="M69.538,90.846v6.681c0,.727-.318,1.136-.886,1.148-.591.011-.92-.4-.92-1.17V90.88c-.523.511-.943.943-1.375,1.375-.227.227-.443.466-.682.682a.909.909,0,1,1-1.261-1.307c.75-.773,1.523-1.523,2.284-2.3.4-.4.8-.807,1.193-1.216a.921.921,0,0,1,1.477-.023q1.7,1.7,3.409,3.42c.5.511.545,1.045.148,1.443s-.932.341-1.443-.159C70.856,92.2,70.266,91.584,69.538,90.846Z" transform="translate(-56.723 -77.767)"/><path class="b" d="M54.33,200.078h5.159c.727,0,1.125.318,1.136.9s-.4.92-1.114.92H49.069c-.761,0-1.182-.33-1.17-.92.011-.568.42-.886,1.148-.886C50.818,200.066,52.58,200.078,54.33,200.078Z" transform="translate(-42.367 -177.341)"/><path class="b" d="M30.45,26.634c0,.489.011.989,0,1.477a2.258,2.258,0,0,1-2.227,2.25c-1.045.011-2.079.011-3.125,0a.9.9,0,0,1-1-.92.921.921,0,0,1,1.023-.9c.909-.011,1.818,0,2.727,0,.7,0,.8-.08.8-.773V25.044c0-.659.375-1.057.932-1.045.534.011.875.409.886,1.034C30.461,25.566,30.45,26.1,30.45,26.634Z" transform="translate(-21.271 -21.271)"/></g></g></svg>
+                        <p class="drop-here">Drag and drop or choose a file to create users.</p>
+                        <p class="choose-file">Choose a file</p>
+                    </div>                                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

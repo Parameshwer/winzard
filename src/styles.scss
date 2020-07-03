@@ -136,6 +136,12 @@ body {
             border-radius: 26px;
             border: 0;
             cursor: pointer;
+            line-height: 51px;
+            .arrow-forward {
+                position: relative;
+                top: 6px;
+                left: 4px;
+            }
         }
     }
     form {
@@ -145,7 +151,10 @@ body {
             font-family: "Roboto", sans-serif !important;
             color: #37375E;
         }
-        .custom-select {
+        .custom-select {            
+            background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("../dist/assets/images/keyboard_down.png");
+            background-repeat: no-repeat;
+            background-position: 98%;
             width: 390px;
             height: 62px;
             border: 0.5px solid #C7CAD1;
@@ -153,6 +162,7 @@ body {
             color: #37375E;
             font-size: 16px;
             border-radius: 4px;
+            
             option {
                 padding: 10px;
             }
@@ -168,6 +178,7 @@ body {
             }
         }
         .form-control {
+        
             &::placeholder {
                 opacity: 0.57;
                 color: #37375E;     

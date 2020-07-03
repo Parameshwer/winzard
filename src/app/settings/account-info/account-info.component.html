@@ -1,0 +1,118 @@
+<div class="setting-inner-content">
+    <form class="form w-100" [formGroup]="accountInfo">
+
+        <div class="sec-container">
+            <h4 class="field-sec-title">Company Info</h4>
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="companyname">Company Name/Account Name</label>
+                    <input type="text" placeholder="Company Name" formControlName="companyName" alphhaNumericOnly class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="companywebsite">Company Website</label>
+                    <input type="text" placeholder="Company Website" formControlName="companyWebsite"
+                        class="form-control" />
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="companyname">Custom URL</label>
+                    <p>{{accountInfoData?.customUrl}}</p>
+                    <!-- <input type="text" placeholder="Company Name" formControlName="companyName" alphhaNumericOnly class="form-control" /> -->
+                </div>
+
+            </div>
+
+        </div>
+        <div class="sec-container">
+            <h4 class="field-sec-title">Address</h4>
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="companyAddress">Company Address Line1 </label>
+                    <input type="text" placeholder="Company Address" alphhaNumericOnly formControlName="companyAddress"
+                        class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="companyAddress2">Company Address Line2</label>
+                    <input type="text" placeholder="Company Address" alphhaNumericOnly formControlName="companyAddress2"
+                        class="form-control" />
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="pincode">Pincode </label>
+                    <input type="number" placeholder="Pincode" formControlName="pincode" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" placeholder="city" alphhaNumericOnly formControlName="city" class="form-control" />
+                </div>
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="State">State</label>
+                    <input type="text" placeholder="state" alphhaNumericOnly formControlName="state" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <mat-select class="form-control" formControlName="country" placeholder="Select country">
+                        <mat-option *ngFor="let country of countryList" [value]="country.alpha2code">{{ country.countryName }}</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+        </div>
+        <div class="sec-container">
+            <h4 class="field-sec-title with-icons">
+                Financial Year and Subgoal Frequency
+
+                <span class="year-icons">
+                    <mat-icon class="edit-icon" (click)="openDialog('Edit')">create</mat-icon>
+                    <mat-icon class="add-icon" (click)="openDialog('Add')">add_circle_outline</mat-icon>
+                </span>
+            </h4>
+            <table class="table" *ngIf="fincalYearDetails">
+                <thead>
+                    <tr>
+                        <th>Financial Year</th>
+                        <th>Subgoal Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{fincalYearDetails[0]?.startmonth}} {{fincalYearDetails[0]?.firstyear}} - {{fincalYearDetails[0]?.endmonth}} {{fincalYearDetails[0]?.secondyear}} (Current)
+                        </td>
+                        <td class="text-capitalize">{{fincalYearDetails[0]?.frequency}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{fincalYearDetails[1]?.startmonth}} {{fincalYearDetails[1]?.firstyear}} - {{fincalYearDetails[1]?.endmonth}} {{fincalYearDetails[1]?.secondyear}} (Next)
+                        </td>
+                        <td class="text-capitalize">{{fincalYearDetails[1]?.frequency}}</td>
+                    </tr>
+                  
+                </tbody>
+            </table>
+        </div>
+
+    </form>
+    <div class="settings-footer">
+        <button class="custom-btn white-btn">Cancel</button>
+        <button class="custom-btn" (click)="getUpdateCompanyInfo()">Submit</button>
+    </div>
+</div>

@@ -18,7 +18,10 @@
             <mat-icon [ngbTooltip]="tipContent" container="body" placement="top-right" matSuffix (click)="chide = !chide">{{chide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </div>
         <div class="btn-group">
-            <button class="login-btn" (click)="onSubmit()">Next <i class="fa fa-arrow-right"></i></button>
+            <button class="login-btn" (click)="onSubmit()">
+                <span>Next</span>
+                <span class="material-icons arrow-forward">arrow_forward</span>
+            </button>
         </div>  
     </form>
 </div>

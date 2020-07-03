@@ -12,6 +12,7 @@ const routes: Routes = [
     path: '',
     component: AppLandingPageComponent,
     children: [      
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'forgotPassword', component: ForgotPasswordComponent },
       { path: 'changePassword', component: ChangePagePasswordPageComponent },

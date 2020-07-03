@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       name: "Goal Management",
-      route: "/home/users",
+      route: "./goalManagement",
       iconName:'fa-users',
       key: "users",
     },

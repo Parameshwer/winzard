@@ -177,6 +177,7 @@ export class AboutCompanyComponent implements OnInit {
             this.showSpinner = false;            
             //this.router.navigate(['onboard/createAccount']);
             this.onFinishEvent.emit();
+            //localStorage.removeItem("userInfo");
           }
         }, err => {
           console.log('HTTP Error', err);

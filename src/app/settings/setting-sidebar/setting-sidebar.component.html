@@ -1,0 +1,30 @@
+<div class="side-bar" [class.toggleSidebar]="showFiller" style="border-right: 1px solid #e8e8e8;">
+    <div class="side-content">
+      <div class="list-data">
+        <mat-nav-list>
+          <div *ngFor="let item of navBar">
+            <mat-list-item *ngIf="!item.children" [routerLink]="[item.route]" routerLinkActive='active'>
+              <span class="routeIcon"><i class="fa {{item.iconName}}"></i></span>
+              <span class="txt">{{item.name}}</span>
+              <i class="fa fa-angle-right arrow-right"></i>
+            </mat-list-item>
+            <mat-list-item *ngIf="item.children">
+              <a (click)="dropdownTrigger($event, item)">
+                  <span class="routeIcon"><i class="fa {{item.iconName}}"></i></span>
+                {{item.name}}
+              </a>
+            </mat-list-item>
+            <mat-list class="child-list" *ngIf="item.children && item.isOpen">
+              <mat-list-item class="childlist-data " *ngFor="let child of item.children" [routerLink]="[child.route]"
+                routerLinkActive='active'>
+                <a>
+                    <span class="routeIcon"><i class="fa {{item.iconName}}"></i></span>
+                  <span>{{ child.name}}</span>
+                </a>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-nav-list>
+      </div>
+    </div>
+  </div>

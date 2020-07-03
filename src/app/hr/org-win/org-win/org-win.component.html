@@ -1,9 +1,70 @@
 <div class="app-inner-container">
-        <div class="sidebar">
-            <app-sidebar></app-sidebar>
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="container">
+        <div class="row grid-actions">
+            <div class="col-sm-4">
+                <h2>All Employees</h2>
+            </div>
+            <div class="col-sm-8 text-right">
+                <div class="search-box">                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11"><defs><style>.a{fill:#37375e;opacity:0.44;}</style></defs><path class="a" d="M10.794,9.831,8.659,7.7a4.829,4.829,0,1,0-.963.963l2.135,2.135a.624.624,0,0,0,.481.206A.687.687,0,0,0,11,10.313.637.637,0,0,0,10.794,9.831ZM1.375,4.813A3.438,3.438,0,1,1,4.813,8.25,3.437,3.437,0,0,1,1.375,4.813Z"/></svg>
+                    <input type="text" placeholder="Search by name, employee id" name="search" />
+                </div>
+              
+
+                <div ngbDropdown class="d-inline-block filter-dropdown">
+                    <button ngbDropdownToggle id="filterDropDown" class="filterby-btn">                    
+                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" ngbDropdownToggle><defs><style>.a{fill:#37375e;}.b{fill:none;}</style></defs><path class="a" d="M12.708,23.5h3.833V21.583H12.708ZM6,12v1.917H23.25V12Zm2.875,6.708h11.5V16.792H8.875Z" transform="translate(-3.125 -6.25)"/><path class="b" d="M0,0H23V23H0Z"/></svg>
+                        Filter by
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="filterDropDown">
+                      <div class="filter-heading">Filter by</div>
+                      <div class="filter-body">
+                          <div class="filter-actions">
+                            <ul>
+                                <li>Gender</li>
+                                <li>Location</li>
+                                <li>Age on Network</li>
+                                <li>Unit/FUnction</li>
+                            </ul>
+                          </div>
+                          <div class="filter-actions-forms">
+                           sasas
+                          </div>
+                      </div>
+                      <div class="filter-footer">
+                          <button type="button" class="clear-all btn btn-link">Clear All</button>
+                          <button type="button" class="apply btn btn-link">Apply</button>
+                      </div>
+                    </div>
+                  </div>
+
+                <button class="add-employee-btn" (click)="addGoal()">+ Add Employee</button>
+            </div>
         </div>
-        <div class="page-container">
-            <router-outlet></router-outlet>
+        <div class="row">
+            <div class="col-sm-12">
+                <ag-grid-angular #agGrid id="myGrid" class="ag-theme-alpine"
+                [modules]="modules" [headerHeight]="65" [rowHeight]="60" [columnDefs]="columnDefs" [defaultColDef]="defaultColDef"
+                [suppressRowClickSelection]="true" [rowSelection]="rowSelection" [rowData]="rowData"
+                (gridReady)="onGridReady($event)"></ag-grid-angular>
+            </div>
+            <div class="col-sm-12 text-right grid-pagination">
+                <!-- <ng-template ngbPaginationPrevious>Prev</ng-template>
+  <ng-template ngbPaginationNext>Next</ng-template>
+                <ngb-pagination [collectionSize]="70" [(page)]="page"></ngb-pagination> -->
+                <ngb-pagination [collectionSize]="70" [(page)]="page" aria-label="Custom pagination">
+                    <ng-template ngbPaginationPrevious><span class="material-icons">arrow_back_ios</span></ng-template>
+                    <ng-template ngbPaginationNext><span class="material-icons">arrow_forward_ios</span></ng-template>
+                  </ngb-pagination>
+                  <select class="grid-page-size">
+                  <option value="10">10 per page</option>
+                  <option value="20">20 per page</option>
+                  <option value="30">30 per page</option>
+              </select>
+            </div>
         </div>
     </div>
-    <!-- E8E8E8 -->
+</div>

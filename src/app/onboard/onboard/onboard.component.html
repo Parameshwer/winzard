@@ -15,7 +15,7 @@
         <app-enter-email (onSubmitEvent)="onSubmitHandler($event)" *ngIf="signUpSections['enterEmail']['show']"></app-enter-email>
         <app-email-otp-page from="onBoard" (onSubmitEvent)="onSubmitHandler($event)" *ngIf="signUpSections['emailOtp']['show']"></app-email-otp-page>
         <app-welcome-winzard (onSubmitEvent)="onSubmitHandler($event)" *ngIf="signUpSections['welcomeWinzard']['show']"></app-welcome-winzard>
-        <app-about-company (onFinishEvent)="onFinishHandler($event)" *ngIf="signUpSections['aboutCompany']['show']"></app-about-company>       
+        <app-about-company (onFinishEvent)="onFinishHandler()" *ngIf="signUpSections['aboutCompany']['show']"></app-about-company>       
       </div>
     </div>
   </div>

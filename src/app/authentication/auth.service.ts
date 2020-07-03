@@ -61,6 +61,10 @@ export class AuthService {
     let path = this.baseUrl + "getUpdateCompanyInfo";
     return this.http.post<any>(path, body).pipe(catchError(this.handleError));
   }
+  importEmployees(body): Observable<any> {
+    let path = this.baseUrl + "importEmployees";
+    return this.http.post<any>(path, body).pipe(catchError(this.handleError));
+  }
   
   handleError(error) {
     let errorMessage = "";

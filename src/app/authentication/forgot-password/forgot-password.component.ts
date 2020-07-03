@@ -20,7 +20,8 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
     this.forgotPasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
-    })
+    });
+    localStorage.removeItem("userInfo");
   }
   onSubmit() {
     let msg = '';

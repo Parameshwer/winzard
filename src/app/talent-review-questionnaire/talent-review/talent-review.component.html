@@ -127,11 +127,6 @@
                           .value != 1">
                           <mat-option *ngFor="let item of developmentAreaList" [value]="item">{{ item }}</mat-option>
                         </mat-select>
-                        <mat-error class="q-error" *ngIf="
-                          formSubmmitted &&
-                          formGroup.get('developFitmentDropdown').hasError('required')
-                        ">This field is mandatory
-                        </mat-error>
                       </div>
                     </div>
                     <mat-error class="q-error" *ngIf="

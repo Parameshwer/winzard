@@ -1,0 +1,38 @@
+.set-org-wrap {
+    width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    height: 400px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    background: #FFF;
+    transform: translateY(-50%);
+    h1 {
+        color: #26264D;
+        font-weight: bold;
+        font-size: 25px;
+    }
+    p {
+        color: #26264D;
+        font-weight: normal;
+        font-size: 18px;
+    }
+    .set-org-wrap-inner {
+        background: #ffffff;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        .btn-group {
+            .primary-btn {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 15px;
+                margin: 10px auto;
+            }
+        }
+    }
+}

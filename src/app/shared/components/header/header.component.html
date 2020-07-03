@@ -13,7 +13,7 @@
                 <mat-icon class="arrow">keyboard_arrow_down</mat-icon>
             </mat-list-item>
             <ng-template #myWIN>
-                <mat-list-item>
+                <mat-list-item [routerLink]="['./goalManagement']">
                     Goal Management
                 </mat-list-item>
                 <mat-list-item>
@@ -41,7 +41,7 @@
             </mat-list-item>
 
             <ng-template #teamWIN>
-                <mat-list-item>
+                <mat-list-item [routerLink]="['./goalManagement']">
                     Goal Management
                 </mat-list-item>
                 <mat-list-item [routerLink]="['./talentReview']">
@@ -82,7 +82,7 @@
             <mat-nav-list class="d-flex p-0">
                 <mat-list-item routerLinkActive="active"
                 [routerLink]="['./orgWIN/talentMangement']" class="org-menu">OrgWIN</mat-list-item>
-                <mat-list-item class="icon-menu-link">
+                <mat-list-item class="icon-menu-link" [routerLink]="['./settings/accountInfo']">
                     <!-- <i class="fa fa-cog"></i> -->
                     <mat-icon>settings</mat-icon>
                 </mat-list-item>

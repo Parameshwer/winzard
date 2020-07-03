@@ -21,9 +21,9 @@ export class EmailOtpPageComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    
-    if(this.loggedInUserInfo && this.loggedInUserInfo.user.data.user) {
-      this.userEmail = this.loggedInUserInfo.user.data.user.email;
+    console.log(this.loggedInUserInfo);
+    if(this.loggedInUserInfo && this.loggedInUserInfo.data.user) {
+      this.userEmail = this.loggedInUserInfo.data.user.email;
     } else {
       this.userEmail = this._service.userSignUpInfo.email;
     }    
@@ -56,11 +56,16 @@ export class EmailOtpPageComponent implements OnInit {
             }
           } else {
             this.showSpinner = false;
-            this.ngOtpInputRef.setValue("");
+            if(this.ngOtpInputRef) {
+              this.ngOtpInputRef.setValue("");
+            }
           }
         }, err => {
           this.showSpinner = false;
-          this.ngOtpInputRef.setValue("");
+          if(this.ngOtpInputRef) {
+            this.ngOtpInputRef.setValue("");
+          }
+          
           console.log('HTTP Error', err);
         })
     }else {      

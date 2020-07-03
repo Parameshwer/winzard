@@ -36,7 +36,6 @@ export class ChangePagePasswordPageComponent implements OnInit {
       };
 
       this._service.getResetPassword(body).subscribe(res => { 
-        console.log(res);
         if (res) {
           this._service.openConfirmDialog(res.msg, 'error',false,() =>{
             localStorage.removeItem("otp");

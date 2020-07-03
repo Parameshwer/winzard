@@ -1,0 +1,131 @@
+<div class="add-employee-wrap">
+    <div class="add-employee-header">
+        <div class="add-employee-tabs">
+            <p (click)="setActiveTab()" [ngClass]="{'active': activeUserCreationTab == 'userCreation'}">Create User</p>
+            <p (click)="setActiveTab()" [ngClass]="{'active': activeUserCreationTab == 'uploadDoc'}">Upload Doc</p>
+        </div>
+    </div>
+    <div class="add-employee-body">
+        <div class="create-user" [hidden]="activeUserCreationTab == 'uploadDoc'">
+            <form class="w-100" [formGroup]="createUserForm">
+                <div class="form-group">
+                    <label for="userName">Employee Code</label>
+                    <input type="text" placeholder="Enter Employee Code" formControlName="employeeCode"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="userName">Employee Name</label>
+                    <input type="text" placeholder="Enter Employee Name" formControlName="employeeName"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <p for="userName">Gender</p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="gender" id="maleRadio"
+                            value="gender">
+                        <label class="form-check-label" for="maleRadio">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="gender" id="femaleRadio"
+                            value="gender">
+                        <label class="form-check-label" for="femaleRadio">Female</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="gender" id="otherRadio"
+                            value="gender">
+                        <label class="form-check-label" for="otherRadio">Other</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="userName">Mobile Number</label>
+                    <input type="text" placeholder="Enter Mobile Number" formControlName="mobileNumber"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="userName">Email</label>
+                    <input type="text" placeholder="Enter Email" formControlName="email"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="userName">Date Of Birth</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" formControlName="dateOfBirth" ngbDatepicker #dob="ngbDatepicker">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" (click)="dob.toggle()" type="button"></button>
+                        </div>
+                      </div>
+                </div>
+                <div class="form-group">
+                    <label for="userName">Date Of Joining</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" formControlName="dateOfJoing" ngbDatepicker #doj="ngbDatepicker">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" (click)="doj.toggle()" type="button"></button>
+                        </div>
+                      </div>
+                </div>
+                <div class="form-group">
+                    <label for="userName">Grade or Level</label>
+                    <input type="text"  formControlName="gradeOrLevel" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="userName">Designation</label>
+                    <input type="text"  placeholder="Enter Designation" formControlName="designation" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="userName">Unit or Function</label>
+                    <input type="text" formControlName="unitOrFunction" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="userName">Unit Head</label>
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" formControlName="unitHead" id="maleRadio"
+                                value="gender">
+                            <label class="form-check-label" for="maleRadio">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" formControlName="unitHead" id="femaleRadio"
+                                value="gender">
+                            <label class="form-check-label" for="femaleRadio">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="userName">Sub unit or Sub Function</label>
+                    <input type="text" formControlName="subUnitOrSubFuntion" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="userName">Sub Function2</label>
+                    <input type="text" placeholder="Enter Sub Function2" formControlName="subFunction2" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" placeholder="Enter location" formControlName="location" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="location">Branch</label>
+                    <input type="text" placeholder="Enter Branch" formControlName="branch" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="location">Reporting Manager Employee Code</label>
+                    <input type="text" placeholder="Reporting to" formControlName="reportingManagerEmployeeCode" class="form-control" />
+                </div>
+            </form>
+        </div>
+        <div class="upload-doc"  [hidden]="activeUserCreationTab == 'userCreation'">
+            <app-upload-users from="createEmployeeDialog"></app-upload-users>
+        </div>
+    </div>
+    <div class="add-employee-footer">
+        <button class="btn btn-text">Cancel</button>
+        <div class="btn-group">
+            <button class="primary-btn">
+                Next
+            </button>
+        </div>
+
+    </div>
+</div>

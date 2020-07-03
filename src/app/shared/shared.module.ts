@@ -11,23 +11,34 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { AppDateAdapter, APP_DATE_FORMATS } from './date.adapter';
+import { AlphhaNumericDirective } from './validators/alphha-numeric.directive';
 import  { EmailOtpPageComponent } from '../authentication/email-otp-page/email-otp-page.component';
 import { NgOtpInputModule } from  'ng-otp-input';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
-  declarations: [EmailOtpPageComponent,HeaderComponent, SidebarComponent, TasksComponent, CustomDropdownComponent, ConfirmDialogComponent],
+  declarations: [EmailOtpPageComponent,HeaderComponent, SidebarComponent, TasksComponent, CustomDropdownComponent, ConfirmDialogComponent, AlphhaNumericDirective],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
     MaterialModule,
     NgbModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    AgGridModule.withComponents([])
   ],
-  exports: [FormsModule, ReactiveFormsModule, MaterialModule,
+  exports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
     NgbModule,
     EmailOtpPageComponent,
-    HeaderComponent, SidebarComponent, TasksComponent, CustomDropdownComponent],
+    HeaderComponent,
+    SidebarComponent,
+    TasksComponent,
+    CustomDropdownComponent,
+    AgGridModule
+  ],
   entryComponents: [ConfirmDialogComponent],
   providers: [
     {

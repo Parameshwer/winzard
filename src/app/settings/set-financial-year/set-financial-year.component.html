@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{data?.type}} Financial Year and Subgoal Frequency</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="dialog-content" [formGroup]="setFinancialForm">
+    <div class="form-group">
+      <label for="country">Start month of Financial Year</label>
+      <mat-select class="form-control" formControlName="startmonth" placeholder="Select Month" (selectionChange)="onMonthChange($event)">
+        <mat-option *ngFor="let month of monthDropdown" [value]="month.value" [disabled]="month.disabled">{{ month.value }}</mat-option>
+      </mat-select>
+    </div>
+    <div class="form-group">
+      <label for="country">First year of Financial Year</label>
+      <mat-select class="form-control" formControlName="firstyear" placeholder="Select Year" (selectionChange)="onYearChange($event)">
+        <mat-option *ngFor="let year of yearList" [value]="year">{{ year }}</mat-option>
+      </mat-select>
+    </div>
+    <div class="form-group">
+      <label for="country">Subgoal Frequency</label>
+      <mat-select class="form-control" formControlName="frequency" placeholder="Select Frequency">
+        <mat-option value="monthly">Monthly</mat-option>
+        <mat-option value="quarterly">Quarterly</mat-option>
+      </mat-select>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="settings-footer">
+  <button class="custom-btn white-btn" mat-dialog-close>Cancel</button>
+  <button class="custom-btn" [mat-dialog-close]="true" (click)="onFormSubmit()">Set</button>
+</mat-dialog-actions>

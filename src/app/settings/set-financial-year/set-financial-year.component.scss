@@ -1,0 +1,22 @@
+.mat-dialog-title{
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 18px;
+    font-weight: 500;
+}
+.dialog-content{
+    .form-group{
+        display: flex;
+        margin-bottom: 10px;
+        align-items: center;
+        padding: 10px 30px;
+        label{
+            width: 200px;
+            font-size: 15px;
+            margin-right: 50px;
+            font-family: 'Poppins', sans-serif !important;
+        }
+        .mat-select{
+            height: 50px;
+        }
+    }
+}

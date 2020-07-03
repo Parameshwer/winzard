@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TalentManagementComponent } from './talent-management/talent-management.component';
 import { OrgWinComponent } from './org-win/org-win.component';
 import { PeopleAssessmentComponent } from './people-assessment/people-assessment.component';
+import { GoalManagementComponent } from './goal-management/goal-management.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,10 @@ const routes: Routes = [
         path:'peopleAssessment',
         component:PeopleAssessmentComponent
       },
-      
+      {
+        path:'goalManagement',
+        component:GoalManagementComponent
+      }
     ]
   },
   

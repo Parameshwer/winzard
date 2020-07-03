@@ -1,0 +1,78 @@
+<div class="app-inner-container review-page">
+  <div class="page-heading">
+    <h3 class="heading">TeamWIN Goal Management</h3>
+    <div class="drop-down-sec">
+      <label>Financial Year</label>
+      <mat-select class="form-control" placeholder="Select Year">
+        <mat-option>
+          Apr 20 - Mar 21
+        </mat-option>
+      </mat-select>
+    </div>
+    <div class="drop-down-sec">
+      <label>View By</label>
+      <mat-select class="form-control" placeholder="Select View">
+        <mat-option>
+          All 
+        </mat-option>
+        <mat-option>Supervisor Intervention</mat-option>
+      </mat-select>
+    </div>
+    <div class="drop-down-sec">
+      <label>Rating</label>
+      <mat-select class="form-control" placeholder="Select Rating">
+        <mat-option>
+          Sub Goals 
+        </mat-option>
+        <mat-option>Work Plans</mat-option>
+      </mat-select>
+    </div>
+    <button class="square-btn" (click)="addGoal()">
+      + Add Goals
+    </button>
+  </div>
+  <mat-horizontal-stepper #stepper class="no-indications">
+    <mat-step>
+      <div class="inner-page with-drawer review">
+        <div class="talent-review">
+          <div class="talent-leftsec">
+            <ng-container *ngFor="let each of usersList; let index = index">
+              <div class="review-list" [class.selected]="selectedRow && selectedRow?._id == each._id"
+                (click)="onSelect(each, index)">
+                <div class="icon">
+                  <span class="name-circle">
+                    {{
+                    each?.employee?.fullname
+                      ? each?.employee?.fullname?.substring(0, 2)
+                      : ""
+                  }}
+                  </span>
+                </div>
+                <div class="r-sec">
+                  <div class="name">{{ each?.employee?.fullname }}</div>
+                  <div class="sec">
+                    {{ each?.employee?.gender == "M" ? "Male" : "Female" }} | Age
+                    {{ each?.employee?.dob }}
+                  </div>
+                  <div class="sec">
+                    <mat-icon class="location-icon">
+                      location_on
+                    </mat-icon>
+                    {{ each?.employee?.location }}
+                  </div>
+                </div>
+                <i class="fa fa-angle-right arrow-right"></i>
+              </div>
+            </ng-container>
+          </div>
+          <div class="talent-contentsec">
+            
+          </div>
+        </div>
+        <div class="loader no-data" *ngIf="loader">
+          <mat-spinner></mat-spinner>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

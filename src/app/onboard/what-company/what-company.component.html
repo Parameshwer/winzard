@@ -8,7 +8,10 @@
             </select>
         </div>
         <div class="btn-group">
-            <button class="login-btn" (click)="onSubmit()">Next <i class="fa fa-arrow-right"></i></button>
+            <button class="login-btn">
+                <span>Next</span>
+                <span class="material-icons arrow-forward">arrow_forward</span>
+            </button>
         </div>
         <div class="btn-group">
             <p class="forgot-txt back-btn" [routerLink]="['/login']">Back</p>

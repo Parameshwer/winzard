@@ -14,14 +14,25 @@ import { AboutCompanyFinancialYearComponent } from './about-company-financial-ye
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
-
+import { SetupOrgComponent } from './setup-org/setup-org.component';
+import { UploadUsersComponent } from './upload-users/upload-users.component';
+import { NgxFlowModule, FlowInjectionToken } from '@flowjs/ngx-flow';
+import Flow from '@flowjs/flow.js';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 @NgModule({
-  declarations: [OnboardComponent, EnterEmailComponent, WelcomeWinzardComponent, AboutCompanyComponent, CompanySizeComponent, AccountUrlComponent, WhatCompanyComponent, AboutCompanyFinancialYearComponent, PrivacyPolicyComponent, TermsOfUseComponent, CreateAccountComponent],
+  declarations: [OnboardComponent, EnterEmailComponent, WelcomeWinzardComponent, AboutCompanyComponent, CompanySizeComponent, AccountUrlComponent, WhatCompanyComponent, AboutCompanyFinancialYearComponent, PrivacyPolicyComponent, TermsOfUseComponent, CreateAccountComponent, SetupOrgComponent, UploadUsersComponent, EmployeeListComponent],
   imports: [
+    NgxFlowModule,
     CommonModule,
     OnboardRoutingModule,
     SharedModule
+  ],
+  providers: [
+    {
+      provide: FlowInjectionToken, 
+      useValue: Flow
+    }
   ]
 })
 export class OnboardModule { }

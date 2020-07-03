@@ -1,0 +1,124 @@
+ag-grid-angular {
+    height: 70vh;
+    .ag-header-row {
+        color: #fff;
+    }
+  
+}
+
+.grid-actions {
+    padding: 20px 0;
+    h2 {
+        color: #282856;
+        font-size: 16px;
+        margin: 10px 0 0;
+        padding: 0;
+    }
+    .search-box {
+        display: inline-block;
+        border: 1px solid #E0E0EB;
+        padding: 0px 0 0 20px;
+        width: 315px;
+        height: 42px;
+        background: #fff;
+        line-height: 38px;
+        text-align: left;
+        svg {
+            margin-right: 10px;
+        }
+        input {
+            border: 0 none;
+            background: none;
+            width: 92%;
+            color: #37375E;
+            font-size: 13px;
+            &:focus {
+                border: 0 none;
+                outline: none;
+            }
+        }
+    }
+    .filterby-btn {
+        padding: 8px 18px 8px 15px;
+        background: #fff;
+        border: 1px solid #E0E0EB;
+        font-size: 13px;
+        color: #37375E;
+        margin-left: 20px;
+        svg {
+            margin-right: 10px;
+        }
+    }
+    .add-employee-btn {
+        background: #E9BB00;
+        padding: 10px 15px;
+        border: 0 none;
+        color: #282856;
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: 3px;
+        margin-left: 60px;
+    }
+    .filter-dropdown {
+        .dropdown-toggle {
+            &::after {
+                display: none;
+            }
+        }
+        .dropdown-menu {
+            width: 450px;
+            border-radius: 0;
+            padding: 0;
+            .filter-heading {
+                padding: 15px 30px;
+                border-bottom: 1px solid rgb(239, 239, 239);
+                color: rgb(55, 55, 94);
+            }
+            .filter-body {
+                display: flex;
+                padding: 0;
+                border-bottom: 1px solid rgb(239, 239, 239);
+                color: rgb(55, 55, 94);
+                font-size: 11px;
+                .filter-actions{
+                    border-right: 1px solid rgb(239, 239, 239);
+                    
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        li {
+                            display: block;
+                            list-style: none;
+                            padding: 20px 30px;
+                            cursor: pointer;
+                            &:hover {
+                                background: #dcecff;
+                            }
+                            
+                        }
+                    }
+                }
+                .filter-actions-forms {
+                    padding: 20px;
+                }
+            }
+            .filter-footer {
+                padding: 10px 15px;
+                .clear-all {
+                    color: rgb(55, 55, 94);
+                }
+                .apply {
+                    float: right;
+                    color: rgb(14, 113, 235);
+                }
+                button {
+                    font-size: 13px;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+       
+    }
+}
